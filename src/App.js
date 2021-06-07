@@ -23,7 +23,7 @@ const App = () => {
 
   return (
     <>
-      <Navbar toggleMenu={toggleMenu} />
+      <Navbar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
       <Dropdown toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
     </>
   );

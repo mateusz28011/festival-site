@@ -1,32 +1,22 @@
-import React from 'react';
+import { React, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { GiMushroomsCluster } from 'react-icons/gi';
 
-const Navbar = ({ toggleMenu }) => {
-  const linkStyle = 'text-center text-glow hidden sm:block';
+const Navbar = ({ toggleMenu, isMenuOpen }) => {
+  const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
   const sideLinksStyle = 'flex-1 justify-around sm:flex';
 
-  const changeBackground = (e) => {
-    // let nav = e.target.parentElement.parentElement;
-    // console.log(e.target.parentElement);
-    // nav.classList.toggle('animate-pulse');
-    // e.target.parentElement.classList.toggle('delay-1000');
-    // e.target.parentElement.classList.toggle('animate-pulse');
-    // e.target.parentElement.parentElement.classList.toggle('transition-all');
-    // e.target.parentElement.parentElement.classList.toggle('ease-in-out');
-    // e.target.parentElement.parentElement.classList.toggle('duration-500');
-    // e.target.parentElement.parentElement.classList.toggle('via-black');
-    // e.target.parentElement.parentElement.classList.toggle('via-black');
-    // e.target.parentElement.parentElement.classList.toggle('via-blue-300');
-    //
-  };
+  useEffect(() => {
+    const nav = document.getElementsByTagName('nav')[0];
+    nav.classList.toggle('to-secondary-700');
+  }, [isMenuOpen]);
 
   return (
     <nav
       className='min-w-full flex justify-center items-center 
-    bg-gradient-to-r from-primary-700 via-black to-secondary-700 
-    uppercase text-white font-semibold tracking-wide sm:text-sm md:text-base'
+    uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl 
+    bg-gradient-to-r from-primary-700 via-black to-black'
     >
       <div className={sideLinksStyle}>
         <Link to='/about' className={linkStyle}>
@@ -35,26 +25,28 @@ const Navbar = ({ toggleMenu }) => {
         <Link to='/program' className={linkStyle}>
           program
         </Link>
-        <Link to='/info' className={linkStyle}>
-          info
+        <Link to='/gallery' className={linkStyle}>
+          gallery
         </Link>
       </div>
       <Link
         to='/'
-        onMouseEnter={changeBackground}
-        onMouseLeave={changeBackground}
         className='transition duration-500 ease-in-out transform hover:scale-110'
       >
-        <img className='py-2 w-44 md:w-52' src={logo} alt='logo' />
         <img
-          className='py-2 absolute w-44 md:w-52 opacity-0 transition ease-in-out duration-500 hover:opacity-100 filter hue-rotate-90 top-0'
+          className='py-2 w-44 md:w-52 lg:w-60 xl:w-72'
+          src={logo}
+          alt='logo'
+        />
+        <img
+          className='py-2 absolute w-44 md:w-52 lg:w-60 xl:w-72 opacity-0 transition ease-in-out duration-500 hover:opacity-100 filter hue-rotate-90 top-0'
           src={logo}
           alt='logo'
         />
       </Link>
       <div className={sideLinksStyle}>
-        <Link to='/gallery' className={linkStyle}>
-          gallery
+        <Link to='/info' className={linkStyle}>
+          info
         </Link>
         <Link to='/partnership' className={linkStyle}>
           partnership
