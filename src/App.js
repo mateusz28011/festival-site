@@ -2,6 +2,7 @@ import { React, useState, useEffect } from 'react';
 import './App.css';
 import Dropdown from './Components/Dropdown';
 import Navbar from './Components/Navbar';
+import Container from './Components/Container';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -12,19 +13,29 @@ const App = () => {
 
   useEffect(() => {
     const hideMenu = () => {
-      if (window.innerWidth > 640 && isMenuOpen) setIsMenuOpen(false);
+      if (window.innerWidth > 640) setIsMenuOpen(false);
     };
-    window.addEventListener('resize', hideMenu);
+    const hideMenuClick = (e) => {
+      if (e.target.id !== 'dropDown') setIsMenuOpen(false);
+    };
 
-    return () => {
-      window.removeEventListener('resize', hideMenu);
-    };
+    if (isMenuOpen) {
+      window.addEventListener('resize', hideMenu);
+      window.addEventListener('click', hideMenuClick);
+
+      return () => {
+        window.removeEventListener('resize', hideMenu);
+        window.removeEventListener('click', hideMenuClick);
+      };
+    }
   });
 
   return (
     <>
-      <Navbar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
-      <Dropdown toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+      <Container>
+        <Navbar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+        <Dropdown toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+      </Container>
     </>
   );
 };

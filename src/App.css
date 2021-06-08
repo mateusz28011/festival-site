@@ -1,3 +1,7 @@
+body {
+  @apply bg-trueGray-100;
+}
+
 .text-glow {
   transition: text-shadow 250ms ease-in-out;
 }

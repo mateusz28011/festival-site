@@ -5,20 +5,18 @@ import { GiMushroomsCluster } from 'react-icons/gi';
 
 const Navbar = ({ toggleMenu, isMenuOpen }) => {
   const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
-  const sideLinksStyle = 'flex-1 justify-around sm:flex';
-
-  useEffect(() => {
-    const nav = document.getElementsByTagName('nav')[0];
-    nav.classList.toggle('to-secondary-700');
-  }, [isMenuOpen]);
+  const linkBlockStyle = 'flex-1 justify-around sm:flex';
 
   return (
     <nav
-      className='min-w-full flex justify-center items-center 
-    uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl 
-    bg-gradient-to-r from-primary-700 via-black to-black'
+      className={
+        'max-w-screen-2xl flex justify-center items-center transition-all' +
+        'uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl ' +
+        'bg-gradient-to-r from-fuchsia-700 via-black  relative z-10 transition-all transform ' +
+        (isMenuOpen ? 'to-black' : 'to-secondary-600')
+      }
     >
-      <div className={sideLinksStyle}>
+      <div className={linkBlockStyle}>
         <Link to='/about' className={linkStyle}>
           about
         </Link>
@@ -44,7 +42,7 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
           alt='logo'
         />
       </Link>
-      <div className={sideLinksStyle}>
+      <div className={linkBlockStyle}>
         <Link to='/info' className={linkStyle}>
           info
         </Link>
@@ -55,7 +53,10 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
           contact
         </Link>
         <GiMushroomsCluster
-          className='ml-auto mr-6 w-8 h-auto sm:hidden cursor-pointer'
+          className={
+            'ml-auto mr-6 w-8 h-auto sm:hidden cursor-pointer transition-transform duration-1000 transform hover:scale-110 ' +
+            (isMenuOpen ? 'text-secondary-600 animate-hue' : '')
+          }
           onClick={toggleMenu}
         />
       </div>

@@ -6,11 +6,17 @@ const Dropdown = ({ toggleMenu, isMenuOpen }) => {
 
   return (
     <div
+      id='dropDown'
       className={
-        isMenuOpen
-          ? 'flex flex-col items-center uppercase font-aldrich w-1/3 ml-auto bg-gradient-to-b from-black to-secondary-700 text-white rounded-bl-lg'
-          : 'hidden'
+        'flex flex-col items-center uppercase font-aldrich w-1/3 ml-auto bg-gradient-to-b scale-0 origin-top-right' +
+        ' from-black to-secondary-600 text-white rounded-bl-lg transition-transform duration-300 transform -translate-y-full' +
+        (isMenuOpen ? 'translate-y-0 scale-100' : '')
       }
+      // className={
+      //   isMenuOpen
+      //     ? 'flex flex-col items-center uppercase font-aldrich w-1/3 ml-auto bg-gradient-to-b from-black to-secondary-600 text-white rounded-bl-lg animate-eject '
+      //     : 'hidden'
+      // }
     >
       <Link to='/about' className={linkStyle}>
         about
@@ -18,11 +24,11 @@ const Dropdown = ({ toggleMenu, isMenuOpen }) => {
       <Link to='/program' className={linkStyle}>
         program
       </Link>
-      <Link to='/info' className={linkStyle}>
-        info
-      </Link>
       <Link to='/gallery' className={linkStyle}>
         gallery
+      </Link>
+      <Link to='/info' className={linkStyle}>
+        info
       </Link>
       <Link to='/partnership' className={linkStyle}>
         partnership
