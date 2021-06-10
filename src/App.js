@@ -1,8 +1,10 @@
-import { React, useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import Dropdown from './Components/Dropdown';
 import Navbar from './Components/Navbar';
 import Container from './Components/Container';
+import { AudioVisualizerProvider } from './Components/AudioVisualizerContext';
+import AudioPlayer from './Components/AudioPlayer';
 
 const App = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -31,12 +33,13 @@ const App = () => {
   });
 
   return (
-    <>
+    <AudioVisualizerProvider>
       <Container>
         <Navbar toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
         <Dropdown toggleMenu={toggleMenu} isMenuOpen={isMenuOpen} />
+        <AudioPlayer />
       </Container>
-    </>
+    </AudioVisualizerProvider>
   );
 };
 

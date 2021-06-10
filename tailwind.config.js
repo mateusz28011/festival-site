@@ -39,10 +39,10 @@ module.exports = {
       keyframes: {
         hue: {
           '0%': {
-            filter: 'hue-rotate(0deg)',
+            filter: 'hue-rotate(90deg)',
           },
           '100%': {
-            filter: 'hue-rotate(90deg)',
+            filter: 'hue-rotate(0deg)',
           },
         },
       },

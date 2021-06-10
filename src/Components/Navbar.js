@@ -1,4 +1,4 @@
-import { React, useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { GiMushroomsCluster } from 'react-icons/gi';
@@ -10,9 +10,9 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
   return (
     <nav
       className={
-        'max-w-screen-2xl flex justify-center items-center transition-all' +
+        'max-w-screen-2xl flex justify-center items-center ' +
         'uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl ' +
-        'bg-gradient-to-r from-fuchsia-700 via-black  relative z-10 transition-all transform ' +
+        'bg-gradient-to-r from-fuchsia-700 via-black  relative z-10 ' +
         (isMenuOpen ? 'to-black' : 'to-secondary-600')
       }
     >

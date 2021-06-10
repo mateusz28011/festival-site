@@ -8,7 +8,7 @@ const Dropdown = ({ toggleMenu, isMenuOpen }) => {
     <div
       id='dropDown'
       className={
-        'flex flex-col items-center uppercase font-aldrich w-1/3 ml-auto bg-gradient-to-b scale-0 origin-top-right' +
+        'absolute flex flex-col items-center uppercase font-aldrich w-1/3 right-0 bg-gradient-to-b scale-0 origin-top-right' +
         ' from-black to-secondary-600 text-white rounded-bl-lg transition-transform duration-300 transform -translate-y-full' +
         (isMenuOpen ? 'translate-y-0 scale-100' : '')
       }
