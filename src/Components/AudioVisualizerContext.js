@@ -1,15 +1,18 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 
 const initializeVisualizer = () => {
   const audio = document.getElementById('audioPlayer');
   const audioContext = new AudioContext();
   const audioSource = audioContext.createMediaElementSource(audio);
-  const analyzer = audioContext.createAnalyser();
-  analyzer.fftSize = 1024;
-  audioSource.connect(analyzer);
+  const analyser = audioContext.createAnalyser();
+  analyser.fftSize = 1024;
+  analyser.minDecibels = -60;
+  analyser.maxDecibels = -15;
+  audioSource.connect(analyser);
   audioSource.connect(audioContext.destination);
   audio.volume = 0.2;
-  return { audio, analyzer };
+  audio.currentTime = 200;
+  return { audio, analyser: analyser };
 };
 
 const AudioVisualizerContext = React.createContext();
@@ -19,16 +22,17 @@ export const useAudio = () => {
 };
 
 export const AudioVisualizerProvider = ({ children }) => {
-  const [audio, setAudio] = useState('');
+  const [audio, setAudio] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
-  const [analyzer, setAnalyzer] = useState('');
-  const [frequenciesBands, setFrequenciesBands] = useState('');
+  const [analyser, setAnalyzer] = useState();
+  const [bassMultiplier, setBassMultiplier] = useState();
+  const requestRef = useRef();
 
   const startVisualizer = () => {
-    if (!analyzer) {
-      const { audio, analyzer } = initializeVisualizer();
+    if (!analyser) {
+      const { audio, analyser } = initializeVisualizer();
       setAudio(audio);
-      setAnalyzer(analyzer);
+      setAnalyzer(analyser);
       toggleIsPlaying();
     }
   };
@@ -37,66 +41,51 @@ export const AudioVisualizerProvider = ({ children }) => {
     setIsPlaying((prev) => !prev);
   };
 
-  useEffect(() => {
-    if (analyzer && isPlaying) {
-      const calculateBands = (timestamp) => {
-        const frequencies = new Uint8Array(analyzer.frequencyBinCount);
-        analyzer.getByteFrequencyData(frequencies);
+  const calculateBands = () => {
+    const frequencies = new Uint8Array(analyser.frequencyBinCount);
+    analyser.getByteFrequencyData(frequencies);
 
-        // let freqBands = new Uint8Array(8);
-        // let count = 0;
-        // for (let i = 0; i < 8; i++) {
-        //   let average = 0;
-        //   let sampleCount = Math.pow(2, i) * 2;
-        //   if (i === 7) sampleCount += 2;
-        //   for (let j = 0; j < sampleCount; j++) {
-        //     average += frequencies[count] * (count + 1);
-        //     count++;
-        //   }
-        //   average /= count;
-        //   freqBands[i] = average * 10;
-        // }
-
-        // setFrequenciesBands(freqBands);
-        setFrequenciesBands(frequencies);
-        if (isPlaying) requestAnimationFrame(calculateBands);
-      };
-      window.requestAnimationFrame(calculateBands);
+    let bassMultiplierBuff = 0;
+    for (let i = 0; i < 2; i++) {
+      bassMultiplierBuff += frequencies[i];
     }
-  }, [analyzer, isPlaying]);
+
+    bassMultiplierBuff /= 2;
+    bassMultiplierBuff /= 256;
+
+    setBassMultiplier(1 + bassMultiplierBuff);
+
+    requestRef.current = window.requestAnimationFrame(calculateBands);
+  };
+
+  const smoothAnimationEnding = () => {
+    setBassMultiplier((prev) => {
+      if (prev > 1.0) {
+        requestRef.current = window.requestAnimationFrame(
+          smoothAnimationEnding
+        );
+        return prev - 0.005;
+      } else {
+        window.cancelAnimationFrame(requestRef.current);
+        return 1;
+      }
+    });
+  };
+
+  useEffect(() => {
+    if (isPlaying) {
+      requestRef.current = window.requestAnimationFrame(calculateBands);
+    } else if (requestRef.current) {
+      window.cancelAnimationFrame(requestRef.current);
+      requestRef.current = window.requestAnimationFrame(smoothAnimationEnding);
+    }
+  }, [isPlaying]);
 
   return (
     <AudioVisualizerContext.Provider
-      value={{ startVisualizer, toggleIsPlaying, frequenciesBands }}
+      value={{ startVisualizer, toggleIsPlaying, bassMultiplier }}
     >
       {children}
     </AudioVisualizerContext.Provider>
   );
 };
-
-// useEffect(() => {
-//   const interval = setInterval(() => {
-//     if (analyzer) {
-//       const frequencies = new Uint8Array(analyzer.frequencyBinCount);
-//       analyzer.getByteFrequencyData(frequencies);
-
-//       let freqBands = new Uint8Array(8);
-//       let count = 0;
-//       for (let i = 0; i < 8; i++) {
-//         let average = 0;
-//         let sampleCount = Math.pow(2, i) * 2;
-//         if (i === 7) sampleCount += 2;
-//         for (let j = 0; j < sampleCount; j++) {
-//           average += frequencies[count] * (count + 1);
-//           count++;
-//         }
-//         average /= count;
-//         freqBands[i] = average;
-//       }
-
-//       setFrequenciesBands(freqBands);
-//       console.log(frequenciesBands);
-//     }
-//   }, 500);
-//   return () => clearInterval(interval);
-// }, [analyzer, frequenciesBands]);

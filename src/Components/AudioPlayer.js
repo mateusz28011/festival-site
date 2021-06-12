@@ -1,29 +1,24 @@
 import React from 'react';
 import { useAudio } from './AudioVisualizerContext';
-import sound from '../audio/tocame.mp3';
+import sound from '../audio/im-headofnasa.mp3';
 
 const AudioPlayer = () => {
-  const { startVisualizer, toggleIsPlaying, frequenciesBands } = useAudio();
+  const { startVisualizer, toggleIsPlaying, bassMultiplier } = useAudio();
 
   return (
     <>
-      {Array.from(frequenciesBands).map((freq, index) => {
-        return (
-          <div
-            key={index}
-            className='bg-secondary-500 w-10'
-            style={{ width: `${frequenciesBands[index]}px` }}
-          >
-            {index}
-          </div>
-        );
-      })}
-
+      <div
+        className='bg-secondary-500 w-10'
+        style={{ width: `${20 * bassMultiplier}px` }}
+      >
+        {bassMultiplier}
+      </div>
+      {/* seeking triggers toggle!!! */}
       <audio
         id='audioPlayer'
         src={sound}
         controls
-        onPlay={frequenciesBands ? toggleIsPlaying : startVisualizer}
+        onPlay={bassMultiplier ? toggleIsPlaying : startVisualizer}
         onPause={toggleIsPlaying}
       ></audio>
     </>
