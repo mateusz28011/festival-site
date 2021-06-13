@@ -1,16 +1,45 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { GiMushroomsCluster } from 'react-icons/gi';
+import { useAudio } from './AudioVisualizerContext';
 
 const Navbar = ({ toggleMenu, isMenuOpen }) => {
   const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
   const linkBlockStyle = 'flex-1 justify-around sm:flex';
 
+  const { bassMultiplier } = useAudio();
+
+  useEffect(() => {
+    if (bassMultiplier) {
+      let logo1 = document.getElementById('logo');
+      let logo2 = document.getElementById('logoTransition');
+      let bassMultiplierAdjusted = (bassMultiplier - 1) / 2 + 1;
+      logo1.style.transform = `scale(${bassMultiplierAdjusted})`;
+      logo2.style.transform = `scale(${bassMultiplierAdjusted})`;
+    }
+  }, [bassMultiplier]);
+
+  const triggerLogoAnimationForTouchScreen = (e) => {
+    const logoContainer = document.getElementById('logoContainer');
+    const logoTransition = document.getElementById('logoTransition');
+    if (logoTransition.classList.contains('animate-logomobileopacity')) {
+      logoTransition.classList.remove('animate-logomobileopacity');
+      logoContainer.classList.remove('animate-logomobilescale');
+      setTimeout(() => {
+        logoTransition.classList.add('animate-logomobileopacity');
+        logoContainer.classList.add('animate-logomobilescale');
+      }, 1);
+    } else {
+      logoTransition.classList.add('animate-logomobileopacity');
+      logoContainer.classList.add('animate-logomobilescale');
+    }
+  };
+
   return (
     <nav
       className={
-        'max-w-screen-2xl flex justify-center items-center ' +
+        'flex justify-center items-center ' +
         'uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl ' +
         'bg-gradient-to-r from-fuchsia-700 via-black  relative z-10 ' +
         (isMenuOpen ? 'to-black' : 'to-secondary-600')
@@ -28,16 +57,20 @@ const Navbar = ({ toggleMenu, isMenuOpen }) => {
         </Link>
       </div>
       <Link
+        id='logoContainer'
         to='/'
-        className='transition duration-500 ease-in-out transform hover:scale-110'
+        className='py-2 transition duration-500 ease-in-out transform sm:hover:scale-110'
+        onClick={triggerLogoAnimationForTouchScreen}
       >
         <img
-          className='py-2 w-44 md:w-52 lg:w-60 xl:w-72'
+          className='invisible w-44 md:w-52 lg:w-60 xl:w-72'
           src={logo}
           alt='logo'
         />
+        <img id='logo' className='absolute py-2 top-0' src={logo} alt='logo' />
         <img
-          className='py-2 absolute w-44 md:w-52 lg:w-60 xl:w-72 opacity-0 transition ease-in-out duration-500 hover:opacity-100 filter hue-rotate-90 top-0'
+          id='logoTransition'
+          className='absolute py-2 top-0 opacity-0 transition-opacity ease-in-out duration-500 sm:hover:opacity-100 filter hue-rotate-90'
           src={logo}
           alt='logo'
         />

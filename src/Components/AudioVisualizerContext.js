@@ -39,6 +39,7 @@ export const AudioVisualizerProvider = ({ children }) => {
 
   const toggleIsPlaying = () => {
     setIsPlaying((prev) => !prev);
+    console.log(1);
   };
 
   const calculateBands = () => {

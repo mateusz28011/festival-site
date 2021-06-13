@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Dropdown = ({ toggleMenu, isMenuOpen }) => {
+const Dropdown = ({ isMenuOpen }) => {
   const linkStyle = 'py-1 text-glow';
 
   return (
@@ -12,11 +12,6 @@ const Dropdown = ({ toggleMenu, isMenuOpen }) => {
         ' from-black to-secondary-600 text-white rounded-bl-lg transition-transform duration-300 transform -translate-y-full' +
         (isMenuOpen ? 'translate-y-0 scale-100' : '')
       }
-      // className={
-      //   isMenuOpen
-      //     ? 'flex flex-col items-center uppercase font-aldrich w-1/3 ml-auto bg-gradient-to-b from-black to-secondary-600 text-white rounded-bl-lg animate-eject '
-      //     : 'hidden'
-      // }
     >
       <Link to='/about' className={linkStyle}>
         about

@@ -2,9 +2,8 @@ const colors = require('tailwindcss/colors');
 
 module.exports = {
   purge: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
-  darkMode: false, // or 'media' or 'class'
+  darkMode: false,
   theme: {
-    // colors: { ...colors, ...myColors },
     extend: {
       colors: {
         primary: {
@@ -35,6 +34,8 @@ module.exports = {
       },
       animation: {
         hue: 'hue 3s infinite alternate',
+        logomobileopacity: 'logoopacity 300ms ease-out 2 alternate',
+        logomobilescale: 'logoscale 300ms ease-out 2 alternate',
       },
       keyframes: {
         hue: {
@@ -43,6 +44,16 @@ module.exports = {
           },
           '100%': {
             filter: 'hue-rotate(0deg)',
+          },
+        },
+        logoopacity: {
+          '100%': {
+            opacity: '1',
+          },
+        },
+        logoscale: {
+          '100%': {
+            transform: 'scale(1.1,1.1)',
           },
         },
       },
