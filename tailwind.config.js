@@ -31,6 +31,7 @@ module.exports = {
       },
       zIndex: {
         '-10': '-10',
+        '-20': '-20',
       },
       animation: {
         hue: 'hue 3s infinite alternate',

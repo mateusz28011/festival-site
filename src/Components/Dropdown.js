@@ -1,18 +1,28 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { useEventListners } from './EventListnersContext';
 
-const Dropdown = ({ isMenuOpen }) => {
+const Dropdown = () => {
   const linkStyle = 'py-1 text-glow';
+
+  const { isMenuOpen, isNavbarScrolled } = useEventListners();
 
   return (
     <div
       id='dropDown'
       className={
-        'absolute flex flex-col items-center uppercase font-aldrich w-1/3 right-0 bg-gradient-to-b scale-0 origin-top-right' +
-        ' from-black to-secondary-600 text-white rounded-bl-lg transition-transform duration-300 transform -translate-y-full' +
-        (isMenuOpen ? 'translate-y-0 scale-100' : '')
+        'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-44 right-0 scale-0 origin-top-right top-20 ' +
+        'text-white transition duration-300 transform backdrop-filter ' +
+        (isMenuOpen ? 'translate-y-0 scale-100 ' : '') +
+        (isNavbarScrolled ? 'backdrop-blur-xl ' : 'backdrop-blur ')
       }
     >
+      <div
+        className={
+          'absolute w-full h-full -z-20 rounded-bl-lg bg-gradient-to-b from-black to-lightBlue-500 transition-opacity duration-1000 ' +
+          (isNavbarScrolled ? 'opacity-75 ' : '')
+        }
+      ></div>
       <Link to='/about' className={linkStyle}>
         about
       </Link>

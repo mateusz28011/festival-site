@@ -9,3 +9,8 @@ body {
 .text-glow:hover {
   text-shadow: 0 0 16px #ff66ff;
 }
+
+.container-background {
+  background-image: url('./images/background.png');
+  background-size: contain;
+}

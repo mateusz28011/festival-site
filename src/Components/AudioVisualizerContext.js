@@ -21,7 +21,7 @@ export const useAudio = () => {
   return useContext(AudioVisualizerContext);
 };
 
-export const AudioVisualizerProvider = ({ children }) => {
+const AudioVisualizerProvider = ({ children }) => {
   const [audio, setAudio] = useState();
   const [isPlaying, setIsPlaying] = useState(false);
   const [analyser, setAnalyzer] = useState();
@@ -39,7 +39,6 @@ export const AudioVisualizerProvider = ({ children }) => {
 
   const toggleIsPlaying = () => {
     setIsPlaying((prev) => !prev);
-    console.log(1);
   };
 
   const calculateBands = () => {
@@ -90,3 +89,5 @@ export const AudioVisualizerProvider = ({ children }) => {
     </AudioVisualizerContext.Provider>
   );
 };
+
+export default AudioVisualizerProvider;
