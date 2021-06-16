@@ -9,18 +9,17 @@ const Dropdown = () => {
 
   return (
     <div
-      id='dropDown'
       className={
-        'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-44 right-0 scale-0 origin-top-right top-20 ' +
-        'text-white transition duration-300 transform backdrop-filter ' +
-        (isMenuOpen ? 'translate-y-0 scale-100 ' : '') +
-        (isNavbarScrolled ? 'backdrop-blur-xl ' : 'backdrop-blur ')
+        'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-full right-0 scale-0 origin-top top-24 ' +
+        'text-white transition duration-300 transform backdrop-filter backdrop-blur-md  ' +
+        (isMenuOpen ? 'translate-y-0 scale-100 ' : 'opacity-0 ')
+        // (isNavbarScrolled ? 'backdrop-blur-xl ' : 'backdrop-blur ')
       }
     >
       <div
+        id='dropDownBackground'
         className={
-          'absolute w-full h-full -z-20 rounded-bl-lg bg-gradient-to-b from-black to-lightBlue-500 transition-opacity duration-1000 ' +
-          (isNavbarScrolled ? 'opacity-75 ' : '')
+          'absolute w-full h-full -z-20 rounded-b-lg  bg-gradient-to-b from-cyan-500 to-lightBlue-500 opacity-50 '
         }
       ></div>
       <Link to='/about' className={linkStyle}>

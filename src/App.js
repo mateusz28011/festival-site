@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 import Navbar from './Components/Navbar';
 import Container from './Components/Container';
@@ -14,10 +14,9 @@ const App = () => {
       <AudioVisualizerProvider>
         <Container>
           <Navbar />
-          {/* <AudioPlayer />
-           */}
+          {/* <AudioPlayer /> */}
           <Home />
-          <Footer />
+          {/* <Footer /> */}
         </Container>
       </AudioVisualizerProvider>
     </EventListnersContextProvider>

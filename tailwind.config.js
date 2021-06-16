@@ -37,6 +37,7 @@ module.exports = {
         hue: 'hue 3s infinite alternate',
         logomobileopacity: 'logoopacity 300ms ease-out 2 alternate',
         logomobilescale: 'logoscale 300ms ease-out 2 alternate',
+        updown: 'updown 7s ease-in-out infinite alternate',
       },
       keyframes: {
         hue: {
@@ -57,6 +58,23 @@ module.exports = {
             transform: 'scale(1.1,1.1)',
           },
         },
+        updown: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '33%': {
+            transform: 'translate(0, 30px)',
+          },
+          '66%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform: 'translate(0, -30px)',
+          },
+        },
+      },
+      scale: {
+        '-1': '-1',
       },
     },
   },

@@ -43,20 +43,21 @@ const Navbar = () => {
     <>
       <nav
         className={
-          'sticky flex justify-center items-center top-0 z-20 h-20 sm:h-auto ' +
+          'sticky flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center top-0 z-30 h-24 sm:h-auto ' +
           'uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
         }
       >
         <div
           className={
-            'absolute w-full h-full -z-10 transition-opacity duration-1000 bg-gradient-to-r from-fuchsia-500 via-black ' +
-            (isNavbarScrolled ? 'opacity-75  ' : '') +
-            (isMenuOpen ? 'to-black' : 'to-lightBlue-500')
+            'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-500 from-fuchsia-500 opacity-50 ' +
+            (isMenuOpen
+              ? 'bg-gradient-to-b to-cyan-500 rounded-b-none'
+              : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 ')
           }
         ></div>
         <div
           className={
-            'absolute w-full h-full -z-10 backdrop-filter backdrop-blur-xl '
+            'absolute w-full h-full -z-10 backdrop-filter backdrop-blur-md rounded-xl '
           }
         ></div>
         <div className={linkBlockStyle}>
@@ -78,7 +79,7 @@ const Navbar = () => {
         >
           <img
             className={
-              'invisible transition-all w-44 md:w-52 lg:w-60 xl:w-72'
+              'invisible transition-all w-24 md:w-20 lg:w-24 xl:w-28'
               // (isNavbarScrolled
               //   ? 'md:w-40 lg:w-40 xl:w-40'
               //   : 'md:w-52 lg:w-60 xl:w-72')
@@ -118,7 +119,6 @@ const Navbar = () => {
           />
         </div>
         <Dropdown />
-        {/* <div className='absolute h-full w-full -z-20 text-black'> aa 22</div> */}
       </nav>
     </>
   );
