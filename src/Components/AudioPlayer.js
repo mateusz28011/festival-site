@@ -7,14 +7,15 @@ const AudioPlayer = () => {
 
   return (
     <>
-      <div
+      {/* <div
         className='bg-secondary-500 w-10'
         style={{ width: `${20 * bassMultiplier}px` }}
       >
         {bassMultiplier}
-      </div>
+      </div> */}
       {/* seeking triggers toggle!!! */}
       <audio
+        className='absolute z-30'
         id='audioPlayer'
         src={sound}
         controls

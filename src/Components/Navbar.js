@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
-import { GiMushroomsCluster } from 'react-icons/gi';
+import { FaBars } from 'react-icons/fa';
 import { useAudio } from './AudioVisualizerContext';
 import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
@@ -49,7 +49,7 @@ const Navbar = () => {
       >
         <div
           className={
-            'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-500 from-fuchsia-500 opacity-50 ' +
+            'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-700 from-fuchsia-500 opacity-50 ' +
             (isMenuOpen
               ? 'bg-gradient-to-b to-cyan-500 rounded-b-none'
               : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 ')
@@ -110,9 +110,9 @@ const Navbar = () => {
           <Link to='/contact' className={linkStyle}>
             contact
           </Link>
-          <GiMushroomsCluster
+          <FaBars
             className={
-              'ml-auto mr-6 w-8 h-auto sm:hidden cursor-pointer transition-transform duration-1000 transform hover:scale-110 ' +
+              'ml-auto mr-5 w-7 h-auto sm:hidden cursor-pointer transition-transform duration-1000 transform hover:scale-110 ' +
               (isMenuOpen ? 'text-secondary-600 animate-hue' : '')
             }
             onClick={toggleMenu}

@@ -12,11 +12,11 @@ const App = () => {
   return (
     <EventListnersContextProvider>
       <AudioVisualizerProvider>
+        {/* <AudioPlayer /> */}
         <Container>
           <Navbar />
-          {/* <AudioPlayer /> */}
           <Home />
-          {/* <Footer /> */}
+          <Footer />
         </Container>
       </AudioVisualizerProvider>
     </EventListnersContextProvider>
