@@ -43,13 +43,12 @@ const Navbar = () => {
     <>
       <nav
         className={
-          'sticky flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center top-0 z-30 h-24 sm:h-auto ' +
-          'uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
+          'sticky flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center top-0 z-30 h-24 sm:h-auto uppercase text-white font-aldrich mt-4 sm:mt-0 sm:text-sm md:text-base lg:text-xl xl:text-2xl '
         }
       >
         <div
           className={
-            'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-700 from-fuchsia-500 opacity-50 ' +
+            'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-700 from-fuchsia-500 opacity-40 ' +
             (isMenuOpen
               ? 'bg-gradient-to-b to-cyan-500 rounded-b-none'
               : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 ')
@@ -79,7 +78,7 @@ const Navbar = () => {
         >
           <img
             className={
-              'invisible transition-all w-24 md:w-20 lg:w-24 xl:w-28'
+              'invisible transition-all w-24 sm:w-20 lg:w-24 xl:w-28'
               // (isNavbarScrolled
               //   ? 'md:w-40 lg:w-40 xl:w-40'
               //   : 'md:w-52 lg:w-60 xl:w-72')
@@ -95,7 +94,7 @@ const Navbar = () => {
           />
           <img
             id='logoTransition'
-            className='absolute py-2 top-0 opacity-0 transition-opacity ease-in-out duration-500 sm:hover:opacity-100 filter hue-rotate-90'
+            className='absolute py-2 top-0 opacity-0 transition-opacity ease-in-out duration-500 sm:hover:opacity-100 filter brightness-110'
             src={logo}
             alt='logo'
           />

@@ -7,6 +7,7 @@ import AudioPlayer from './Components/AudioPlayer';
 import Home from './Components/Home';
 import EventListnersContextProvider from './Components/EventListnersContext';
 import Footer from './Components/Footer';
+import Section from './Components/Section';
 
 const App = () => {
   return (
@@ -15,8 +16,10 @@ const App = () => {
         {/* <AudioPlayer /> */}
         <Container>
           <Navbar />
-          <Home />
-          <Footer />
+          <Section>
+            <Home />
+            <Footer />
+          </Section>
         </Container>
       </AudioVisualizerProvider>
     </EventListnersContextProvider>
