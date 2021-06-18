@@ -35,8 +35,8 @@ module.exports = {
       },
       animation: {
         hue: 'hue 3s infinite alternate',
-        logomobileopacity: 'logoopacity 300ms ease-out 2 alternate',
-        logomobilescale: 'logoscale 300ms ease-out 2 alternate',
+        opacity: 'opacity 300ms ease-out 2 alternate',
+        scale: 'scale 300ms ease-out 2 alternate',
         updown: 'updown 7s ease-in-out infinite alternate',
       },
       keyframes: {
@@ -48,12 +48,12 @@ module.exports = {
             filter: 'hue-rotate(0deg)',
           },
         },
-        logoopacity: {
+        opacity: {
           '100%': {
             opacity: '1',
           },
         },
-        logoscale: {
+        scale: {
           '100%': {
             transform: 'scale(1.1,1.1)',
           },

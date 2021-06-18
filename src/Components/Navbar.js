@@ -5,13 +5,14 @@ import { FaBars } from 'react-icons/fa';
 import { useAudio } from './AudioVisualizerContext';
 import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
+import { isTouchDevice } from './Utils';
 
 const Navbar = () => {
   const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
   const linkBlockStyle = 'flex-1 justify-around sm:flex';
 
   const { bassMultiplier } = useAudio();
-  const { isMenuOpen, toggleMenu, isNavbarScrolled } = useEventListners();
+  const { isMenuOpen, toggleMenu } = useEventListners();
 
   useEffect(() => {
     if (bassMultiplier) {
@@ -26,16 +27,16 @@ const Navbar = () => {
   const triggerLogoAnimationForTouchScreen = (e) => {
     const logoContainer = document.getElementById('logoContainer');
     const logoTransition = document.getElementById('logoTransition');
-    if (logoTransition.classList.contains('animate-logomobileopacity')) {
-      logoTransition.classList.remove('animate-logomobileopacity');
-      logoContainer.classList.remove('animate-logomobilescale');
+    if (logoTransition.classList.contains('animate-opacity')) {
+      logoTransition.classList.remove('animate-opacity');
+      logoContainer.classList.remove('animate-scale');
       setTimeout(() => {
-        logoTransition.classList.add('animate-logomobileopacity');
-        logoContainer.classList.add('animate-logomobilescale');
+        logoTransition.classList.add('animate-opacity');
+        logoContainer.classList.add('animate-scale');
       }, 1);
     } else {
-      logoTransition.classList.add('animate-logomobileopacity');
-      logoContainer.classList.add('animate-logomobilescale');
+      logoTransition.classList.add('animate-opacity');
+      logoContainer.classList.add('animate-scale');
     }
   };
 
@@ -74,15 +75,10 @@ const Navbar = () => {
           id='logoContainer'
           to='/'
           className='py-2 transition duration-500 ease-in-out transform sm:hover:scale-110'
-          onClick={triggerLogoAnimationForTouchScreen}
+          onClick={isTouchDevice() ? triggerLogoAnimationForTouchScreen : null}
         >
           <img
-            className={
-              'invisible transition-all w-24 sm:w-20 lg:w-24 xl:w-28'
-              // (isNavbarScrolled
-              //   ? 'md:w-40 lg:w-40 xl:w-40'
-              //   : 'md:w-52 lg:w-60 xl:w-72')
-            }
+            className={'invisible transition-all w-24 sm:w-20 lg:w-24 xl:w-28'}
             src={logo}
             alt='logo'
           />

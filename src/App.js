@@ -5,16 +5,16 @@ import Navbar from './Components/Navbar';
 import Container from './Components/Container';
 import AudioVisualizerProvider from './Components/AudioVisualizerContext';
 import AudioPlayer from './Components/AudioPlayer';
-import Home from './Components/Home';
 import EventListnersContextProvider from './Components/EventListnersContext';
 import Footer from './Components/Footer';
 import Section from './Components/Section';
-import About from './Components/About';
-import Program from './Components/Program';
-import Gallery from './Components/Gallery';
-import Info from './Components/Info';
-import Partnership from './Components/Partnership';
-import Contact from './Components/Contact';
+import Home from './Components/Pages/Home';
+import About from './Components/Pages/About';
+import Program from './Components/Pages/Program';
+import Gallery from './Components/Pages/Gallery';
+import Info from './Components/Pages/Info';
+import Partnership from './Components/Pages/Partnership';
+import Contact from './Components/Pages/Contact';
 
 const App = () => {
   return (
@@ -34,7 +34,6 @@ const App = () => {
               <Route exact path='/program'>
                 <Program />
               </Route>
-
               <Route exact path='/gallery'>
                 <Gallery />
               </Route>
