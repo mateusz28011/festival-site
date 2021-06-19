@@ -36,50 +36,61 @@ const AudioVisualizerProvider = ({ children }) => {
       toggleIsPlaying();
     }
   };
+  useEffect(() => {
+    if (bassMultiplier) {
+      let logo1 = document.getElementById('logo');
+      let logo2 = document.getElementById('logoTransition');
+
+      let bassMultiplierAdjusted = (bassMultiplier - 1) / 2 + 1;
+      logo1.style.transform = `scale(${bassMultiplierAdjusted})`;
+      logo2.style.transform = `scale(${bassMultiplierAdjusted})`;
+    }
+  }, [bassMultiplier]);
 
   const toggleIsPlaying = () => {
     setIsPlaying((prev) => !prev);
   };
 
-  const calculateBands = () => {
-    const frequencies = new Uint8Array(analyser.frequencyBinCount);
-    analyser.getByteFrequencyData(frequencies);
-
-    let bassMultiplierBuff = 0;
-    for (let i = 0; i < 2; i++) {
-      bassMultiplierBuff += frequencies[i];
-    }
-
-    bassMultiplierBuff /= 2;
-    bassMultiplierBuff /= 256;
-
-    setBassMultiplier(1 + bassMultiplierBuff);
-
-    requestRef.current = window.requestAnimationFrame(calculateBands);
-  };
-
-  const smoothAnimationEnding = () => {
-    setBassMultiplier((prev) => {
-      if (prev > 1.0) {
-        requestRef.current = window.requestAnimationFrame(
-          smoothAnimationEnding
-        );
-        return prev - 0.005;
-      } else {
-        window.cancelAnimationFrame(requestRef.current);
-        return 1;
-      }
-    });
-  };
-
   useEffect(() => {
+    const calculateBands = () => {
+      const frequencies = new Uint8Array(analyser.frequencyBinCount);
+      analyser.getByteFrequencyData(frequencies);
+
+      let bassMultiplierBuff = 0;
+      for (let i = 0; i < 2; i++) {
+        bassMultiplierBuff += frequencies[i];
+      }
+
+      bassMultiplierBuff /= 2;
+      bassMultiplierBuff /= 256;
+
+      setBassMultiplier(1 + bassMultiplierBuff);
+
+      requestRef.current = window.requestAnimationFrame(calculateBands);
+    };
+
+    const smoothAnimationEnding = () => {
+      setBassMultiplier((prev) => {
+        if (prev > 1.0) {
+          requestRef.current = window.requestAnimationFrame(
+            smoothAnimationEnding
+          );
+          return prev - 0.005;
+        } else {
+          window.cancelAnimationFrame(requestRef.current);
+          return 1;
+        }
+      });
+    };
+    console.log(isPlaying);
     if (isPlaying) {
       requestRef.current = window.requestAnimationFrame(calculateBands);
-    } else if (requestRef.current) {
+    } else if (requestRef.current && isPlaying === false) {
+      console.log(1);
       window.cancelAnimationFrame(requestRef.current);
       requestRef.current = window.requestAnimationFrame(smoothAnimationEnding);
     }
-  }, [isPlaying]);
+  }, [isPlaying, analyser]);
 
   return (
     <AudioVisualizerContext.Provider

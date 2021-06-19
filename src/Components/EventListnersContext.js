@@ -8,27 +8,27 @@ export const useEventListners = () => {
 
 const EventListnersContextProvider = ({ children }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
+  // const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
-  const toggleIsNavbarScrolled = () => {
-    const nav = document.getElementsByTagName('nav')[0];
-    if (nav.offsetHeight < window.scrollY && isNavbarScrolled == false) {
-      setIsNavbarScrolled(true);
-    } else if (nav.offsetHeight > window.scrollY && isNavbarScrolled) {
-      setIsNavbarScrolled(false);
-    }
-  };
+  // const toggleIsNavbarScrolled = () => {
+  //   const nav = document.getElementsByTagName('nav')[0];
+  //   if (nav.offsetHeight < window.scrollY && isNavbarScrolled == false) {
+  //     setIsNavbarScrolled(true);
+  //   } else if (nav.offsetHeight > window.scrollY && isNavbarScrolled) {
+  //     setIsNavbarScrolled(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    window.addEventListener('scroll', toggleIsNavbarScrolled);
-    return () => {
-      window.removeEventListener('scroll', toggleIsNavbarScrolled);
-    };
-  });
+  // useEffect(() => {
+  //   window.addEventListener('scroll', toggleIsNavbarScrolled);
+  //   return () => {
+  //     window.removeEventListener('scroll', toggleIsNavbarScrolled);
+  //   };
+  // });
 
   useEffect(() => {
     const hideMenu = () => {
@@ -49,9 +49,10 @@ const EventListnersContextProvider = ({ children }) => {
   });
 
   return (
-    <EventListnersContext.Provider
-      value={{ isMenuOpen, toggleMenu, isNavbarScrolled }}
-    >
+    // <EventListnersContext.Provider
+    //   value={{ isMenuOpen, toggleMenu, isNavbarScrolled }}
+    // >
+    <EventListnersContext.Provider value={{ isMenuOpen, toggleMenu }}>
       {children}
     </EventListnersContext.Provider>
   );

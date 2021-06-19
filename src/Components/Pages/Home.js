@@ -5,7 +5,7 @@ import mr1 from '../../images/mr12.svg';
 
 const Home = () => {
   return (
-    <>
+    <div className='flex flex-col sm:flex-row'>
       <div className='w-11/12 h-5/6 mx-auto my-10 mt-5 text-lg shadow-lg rounded-xl backdrop-filter backdrop-blur-md bg-lightBlue-200 bg-opacity-50 px-6 sm:px-8 lg:px-16 sm:h-5/6 sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'>
         <h1 className='text-4xl text-white font-medium pt-8 pb-6 text-center'>
           Welcome to our festival website!
@@ -31,9 +31,8 @@ const Home = () => {
         >
           Read More
         </Link>
-
-        <p className='font-medium text-4xl mt-8 mb-2 text-white text-center'>
-          TIME TO START
+        <p className='font-medium text-4xl mt-10 sm:mt-8 mb-2 text-white text-center'>
+          TIME TO START:
         </p>
         <div className='relative w-max mx-auto mb-12 rounded-xl shadow-lg border-2 backdrop-filter backdrop-blur-md'>
           <Timer />
@@ -45,7 +44,7 @@ const Home = () => {
         src={mr1}
         alt='mushroom'
       />
-    </>
+    </div>
   );
 };
 

@@ -19,41 +19,41 @@ import Contact from './Components/Pages/Contact';
 const App = () => {
   return (
     <EventListnersContextProvider>
-      <AudioVisualizerProvider>
-        {/* <AudioPlayer /> */}
-        <Container>
-          <Navbar />
-          <Section>
-            <Switch>
-              <Route exact path='/'>
-                <Home />
-              </Route>
-              <Route exact path='/about'>
-                <About />
-              </Route>
-              <Route exact path='/program'>
-                <Program />
-              </Route>
-              <Route exact path='/gallery'>
-                <Gallery />
-              </Route>
-              <Route exact path='/info'>
-                <Info />
-              </Route>
-              <Route exact path='/partnership'>
-                <Partnership />
-              </Route>
-              <Route exact path='/contact'>
-                <Contact />
-              </Route>
-              <Route>
-                <Home />
-              </Route>
-            </Switch>
-            <Footer />
-          </Section>
-        </Container>
-      </AudioVisualizerProvider>
+      {/* <AudioVisualizerProvider>
+        <AudioPlayer />
+      </AudioVisualizerProvider> */}
+      <Container>
+        <Navbar />
+        <Section>
+          <Switch>
+            <Route exact path='/'>
+              <Home />
+            </Route>
+            <Route exact path='/about'>
+              <About />
+            </Route>
+            <Route exact path='/program'>
+              <Program />
+            </Route>
+            <Route exact path='/gallery'>
+              <Gallery />
+            </Route>
+            <Route exact path='/info'>
+              <Info />
+            </Route>
+            <Route exact path='/partnership'>
+              <Partnership />
+            </Route>
+            <Route exact path='/contact'>
+              <Contact />
+            </Route>
+            <Route>
+              <Home />
+            </Route>
+          </Switch>
+          <Footer />
+        </Section>
+      </Container>
     </EventListnersContextProvider>
   );
 };

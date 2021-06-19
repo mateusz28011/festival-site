@@ -1,8 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { FaBars } from 'react-icons/fa';
-import { useAudio } from './AudioVisualizerContext';
 import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
 import { isTouchDevice } from './Utils';
@@ -11,18 +10,7 @@ const Navbar = () => {
   const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
   const linkBlockStyle = 'flex-1 justify-around sm:flex';
 
-  const { bassMultiplier } = useAudio();
   const { isMenuOpen, toggleMenu } = useEventListners();
-
-  useEffect(() => {
-    if (bassMultiplier) {
-      let logo1 = document.getElementById('logo');
-      let logo2 = document.getElementById('logoTransition');
-      let bassMultiplierAdjusted = (bassMultiplier - 1) / 2 + 1;
-      logo1.style.transform = `scale(${bassMultiplierAdjusted})`;
-      logo2.style.transform = `scale(${bassMultiplierAdjusted})`;
-    }
-  }, [bassMultiplier]);
 
   const triggerLogoAnimationForTouchScreen = (e) => {
     const logoContainer = document.getElementById('logoContainer');

@@ -6,7 +6,7 @@ function Footer() {
   const iconContainerStyle =
     'rounded-full p-2.5 bg-white bg-opacity-80 shadow-xl backdrop-filter backdrop-blur-sm hover:bg-opacity-100';
   return (
-    <div className='flex mx-auto mt-auto -mb-7 p-2 w-1/2 justify-between sm:flex-col sm:w-16 sm:l-auto sm:-mr-7 sm:my-auto sm:h-52 sm:items-center'>
+    <div className='flex sm:absolute sm:right-0 sm:top-1/2 sm:bottom-1/2 sm: mx-auto mt-auto -mb-7 p-2 w-1/2 justify-between sm:flex-col sm:w-16 sm:-mr-8 sm:my-auto sm:h-52 sm:items-center z-30'>
       <a className={iconContainerStyle} href='/'>
         <FaFacebookF className={iconStyle} />
       </a>

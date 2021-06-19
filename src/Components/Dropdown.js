@@ -5,14 +5,13 @@ import { useEventListners } from './EventListnersContext';
 const Dropdown = () => {
   const linkStyle = 'py-1 text-glow';
 
-  const { isMenuOpen, isNavbarScrolled } = useEventListners();
+  const { isMenuOpen } = useEventListners();
 
   return (
     <div
       className={
         'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-full right-0 scale-0 origin-top top-24 text-white transition duration-300 transform backdrop-filter backdrop-blur-md shadow-lg rounded-b-lg ' +
         (isMenuOpen ? 'translate-y-0 scale-100 ' : 'opacity-0 ')
-        // (isNavbarScrolled ? 'backdrop-blur-xl ' : 'backdrop-blur ')
       }
     >
       <div
