@@ -38,6 +38,7 @@ module.exports = {
         opacity: 'opacity 300ms ease-out 2 alternate',
         scale: 'scale 300ms ease-out 2 alternate',
         updown: 'updown 7s ease-in-out infinite alternate',
+        leftright: 'leftright 7s ease-in-out infinite alternate',
       },
       keyframes: {
         hue: {
@@ -70,6 +71,20 @@ module.exports = {
           },
           '100%': {
             transform: 'translate(0, -25px)',
+          },
+        },
+        leftright: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '33%': {
+            transform: 'translate(30px,0)',
+          },
+          '66%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform: 'translate(-30px,0)',
           },
         },
       },
