@@ -32,7 +32,7 @@ const Navbar = () => {
     <>
       <nav
         className={
-          'sticky flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center top-0 z-30 h-24 sm:h-auto uppercase text-white font-aldrich mt-4 sm:mt-0 sm:text-sm md:text-base lg:text-xl xl:text-2xl '
+          'sticky flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center top-0 z-30 h-24 sm:h-auto uppercase text-white font-aldrich sm:mt-0 sm:text-sm md:text-base lg:text-xl xl:text-2xl '
         }
       >
         <div

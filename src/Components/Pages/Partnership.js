@@ -1,7 +1,7 @@
 import React from 'react';
 
-function Partnership() {
+const Partnership = () => {
   return <div>partnership</div>;
-}
+};
 
 export default Partnership;

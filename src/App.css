@@ -17,3 +17,7 @@ body {
   background-image: url('./images/background.png');
   background-size: contain;
 }
+
+.container-page {
+  @apply text-lg shadow-lg rounded-xl backdrop-filter backdrop-blur-md bg-lightBlue-200 bg-opacity-50 text-center sm:text-left px-6 pt-6 pb-10 sm:px-8 lg:px-16;
+}
