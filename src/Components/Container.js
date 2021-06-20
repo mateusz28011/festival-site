@@ -2,8 +2,8 @@ import React from 'react';
 
 function Container({ children }) {
   return (
-    <div className='overflow-hidden py-10'>
-      <div className='flex flex-col justify-center max-w-screen-xl sm:min-h-screen  mx-auto xl:w-11/12'>
+    <div className='overflow-hidden'>
+      <div className='flex flex-col justify-center max-w-screen-xl sm:min-h-screen  mx-auto xl:w-11/12 py-10'>
         {children}
         {/* <div className='absolute left-1/2 top-0'>
             <img
