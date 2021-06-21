@@ -46,7 +46,7 @@ const About = () => {
         />
       </div>
       <img
-        className='w-72 lg:w-80 sm:absolute sm:mb-28 md:mb-24 mx-auto sm:ml-auto sm:mr-0 md:mr-12 lg:mx-auto lg:-mb-4 right-0 left-0 -bottom-20 animate-leftright filter drop-shadow-lg'
+        className='w-72 lg:w-80 sm:absolute mx-auto sm:right-12 md:right-20 lg:right-28 xl:right-40 bottom-4 lg:bottom-2 animate-leftright filter drop-shadow-lg'
         src={planet}
         alt='planet'
       />

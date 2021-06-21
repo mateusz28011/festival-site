@@ -44,7 +44,7 @@ const Program = () => {
           Lineups
         </h1>
       </div>
-      <div className='container-page sm:px-8 sm:-ml-24 md:-ml-28 lg:-ml-40 xl:-ml-52 w-11/12'>
+      <div className='container-page sm:px-8 sm:-ml-20 md:-ml-24 lg:-ml-36 xl:-ml-48 w-11/12'>
         <img
           className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -right-14 sm:-right-28 md:-right-32 lg:-right-44 xl:-right-56 animate-updown'
           src={mushroom}
@@ -70,7 +70,7 @@ const Program = () => {
           })}
         </div>
       </div>
-      <div className='container-page sm:px-8 w-11/12 mt-14 sm:-mr-24 md:-mr-28 lg:-mr-40 xl:-mr-52'>
+      <div className='container-page sm:px-8 w-11/12 mt-14 sm:-mr-20 md:-mr-24 lg:-mr-36 xl:-mr-48'>
         <img
           className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -left-14 sm:-left-28 md:-left-32 lg:-left-48 xl:-left-56 animate-updown'
           src={moon}
@@ -101,12 +101,3 @@ const Program = () => {
 };
 
 export default Program;
-
-// <p className=''>Astral Projection</p>
-//         <p className=''>Astrix</p>
-//         <p className=''>GMS</p>
-//         <p className=''>Space Tribe</p>
-//         <p className=''>Carbon Based Lifeforms</p>
-//         <p className=''>Egorythmia</p>
-//         <p className=''>Infected Mushroom</p>
-//         <p className=''>Talamasca</p>

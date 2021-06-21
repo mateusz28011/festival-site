@@ -2,7 +2,8 @@ body {
   /* @apply bg-trueGray-100; */
   background-repeat: no-repeat;
   background-attachment: fixed;
-  @apply bg-gradient-to-br from-cyan-400 via-violet-400  to-lightBlue-400;
+  @apply bg-gradient-to-br from-cyan-400 via-violet-400
+    to-lightBlue-400;
 }
 
 .text-glow {

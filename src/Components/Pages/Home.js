@@ -6,7 +6,7 @@ import mr1 from '../../images/mr12.svg';
 const Home = () => {
   return (
     <div className='flex flex-col sm:flex-row'>
-      <div className='w-11/12 h-5/6 mx-auto my-10 mt-5 container-page sm:h-5/6 sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'>
+      <div className='w-11/12 mx-auto my-10 mt-5 container-page sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'>
         <h1 className='text-4xl text-white font-medium pt-8 pb-6 text-center'>
           Welcome to our festival website!
         </h1>
@@ -26,6 +26,9 @@ const Home = () => {
         {/* <h2 className='text-2xl text-white font-medium p-3'>Lorem, ipsum.</h2> */}
         <p className='px-10 text-left'></p>
         <Link
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
           to='/about'
           className='block font-medium sm:text-lg bg-white bg-opacity-80 py-1.5 sm:py-3 rounded-full shadow-lg w-32 sm:w-36 mx-auto sm:mx-0 my-6 ring-0 focus:outline-none hover:bg-opacity-100 text-center'
         >
