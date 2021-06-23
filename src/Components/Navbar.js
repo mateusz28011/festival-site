@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { FaBars } from 'react-icons/fa';
 import { useEventListners } from './EventListnersContext';
@@ -7,10 +7,17 @@ import Dropdown from './Dropdown';
 import { isTouchDevice } from './Utils';
 
 const Navbar = () => {
-  const linkStyle = 'text-center text-glow px-1.5 hidden sm:block';
+  const linkStyle = 'text-center text-glow px-1.5 hidden sm:block ';
   const linkBlockStyle = 'flex-1 justify-around sm:flex';
+  const location = useLocation();
+  // const [pathName, setPathName] = useState(location.pathname);
+  // console.log(pathName);
 
   const { isMenuOpen, toggleMenu } = useEventListners();
+
+  // useEffect(() => {
+  //   setPathName(location.pathname);
+  // }, [location]);
 
   const triggerLogoAnimationForTouchScreen = (e) => {
     const logoContainer = document.getElementById('logoContainer');
@@ -48,13 +55,28 @@ const Navbar = () => {
         }
       ></div>
       <div className={linkBlockStyle}>
-        <Link to='/about' className={linkStyle}>
+        <Link
+          to='/about'
+          className={
+            linkStyle + (location.pathname === '/about' ? 'underline' : '')
+          }
+        >
           about
         </Link>
-        <Link to='/program' className={linkStyle}>
+        <Link
+          to='/program'
+          className={
+            linkStyle + (location.pathname === '/program' ? 'underline' : '')
+          }
+        >
           program
         </Link>
-        <Link to='/gallery' className={linkStyle}>
+        <Link
+          to='/gallery'
+          className={
+            linkStyle + (location.pathname === '/gallery' ? 'underline' : '')
+          }
+        >
           gallery
         </Link>
       </div>
@@ -78,13 +100,29 @@ const Navbar = () => {
         />
       </Link>
       <div className={linkBlockStyle}>
-        <Link to='/info' className={linkStyle}>
+        <Link
+          to='/info'
+          className={
+            linkStyle + (location.pathname === '/info' ? 'underline' : '')
+          }
+        >
           info
         </Link>
-        <Link to='/partnership' className={linkStyle}>
+        <Link
+          to='/partnership'
+          className={
+            linkStyle +
+            (location.pathname === '/partnership' ? 'underline' : '')
+          }
+        >
           partnership
         </Link>
-        <Link to='/contact' className={linkStyle}>
+        <Link
+          to='/contact'
+          className={
+            linkStyle + (location.pathname === '/contact' ? 'underline' : '')
+          }
+        >
           contact
         </Link>
         <FaBars
@@ -95,7 +133,7 @@ const Navbar = () => {
           onClick={toggleMenu}
         />
       </div>
-      <Dropdown />
+      <Dropdown location={location} />
     </nav>
   );
 };

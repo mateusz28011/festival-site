@@ -30,6 +30,7 @@ module.exports = {
         aldrich: ['Aldrich'],
       },
       zIndex: {
+        60: '60',
         '-10': '-10',
         '-20': '-20',
       },
@@ -97,13 +98,18 @@ module.exports = {
         '9/12': '75%',
         '10/12': '83.333333%',
         '11/12': '91.666667%',
+        '19/20': '95%',
+      },
+      width: {
+        '19/20': '95%',
       },
     },
   },
   variants: {
     extend: {
       backgroundColor: ['active'],
+      hueRotate: ['hover'],
     },
   },
-  plugins: [],
+  plugins: [require('tailwindcss-multi-column')()],
 };

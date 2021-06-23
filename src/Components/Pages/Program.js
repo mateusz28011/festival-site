@@ -61,7 +61,7 @@ const Program = () => {
                 className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10'
                 key={name}
               >
-                <img className='rounded-full border-4' src={src} />
+                <img className='rounded-full border-4' src={src} alt={name} />
                 <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                   {name}
                 </p>
@@ -87,7 +87,7 @@ const Program = () => {
                 className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10'
                 key={name}
               >
-                <img className='rounded-full border-4' src={src} />
+                <img className='rounded-full border-4' src={src} alt={name} />
                 <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                   {name}
                 </p>
