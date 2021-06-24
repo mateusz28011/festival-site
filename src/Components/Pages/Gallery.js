@@ -1,9 +1,8 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef } from 'react';
 import GalleryPreview from './GalleryPreview';
 
 const Gallery = () => {
   const [showGalleryPreview, setShowGalleryPreview] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   const importImages = (r) => {
     return r.keys().map(r);
