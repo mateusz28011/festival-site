@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 import { useEventListners } from './EventListnersContext';
 
 const Dropdown = ({ location }) => {
-  console.log(location);
-  const linkStyle = 'py-1 text-glow ';
+  const linkStyle = 'pt-3 text-glow ';
 
   const { isMenuOpen } = useEventListners();
 
@@ -24,7 +23,8 @@ const Dropdown = ({ location }) => {
       <Link
         to='/about'
         className={
-          linkStyle + (location.pathname === '/about' ? 'underline' : '')
+          linkStyle +
+          (location.pathname === '/about' ? 'border-b-2 border-white' : '')
         }
       >
         about
@@ -32,7 +32,8 @@ const Dropdown = ({ location }) => {
       <Link
         to='/program'
         className={
-          linkStyle + (location.pathname === '/program' ? 'underline' : '')
+          linkStyle +
+          (location.pathname === '/program' ? 'border-b-2 border-white' : '')
         }
       >
         program
@@ -40,7 +41,8 @@ const Dropdown = ({ location }) => {
       <Link
         to='/gallery'
         className={
-          linkStyle + (location.pathname === '/gallery' ? 'underline' : '')
+          linkStyle +
+          (location.pathname === '/gallery' ? 'border-b-2 border-white' : '')
         }
       >
         gallery
@@ -48,7 +50,8 @@ const Dropdown = ({ location }) => {
       <Link
         to='/info'
         className={
-          linkStyle + (location.pathname === '/info' ? 'underline' : '')
+          linkStyle +
+          (location.pathname === '/info' ? 'border-b-2 border-white' : '')
         }
       >
         info
@@ -56,7 +59,10 @@ const Dropdown = ({ location }) => {
       <Link
         to='/partnership'
         className={
-          linkStyle + (location.pathname === '/partnership' ? 'underline' : '')
+          linkStyle +
+          (location.pathname === '/partnership'
+            ? 'border-b-2 border-white'
+            : '')
         }
       >
         partnership
@@ -64,7 +70,9 @@ const Dropdown = ({ location }) => {
       <Link
         to='/contact'
         className={
-          linkStyle + (location.pathname === '/contact' ? 'underline' : '')
+          linkStyle +
+          'mb-3' +
+          (location.pathname === '/contact' ? 'border-b-2 border-white' : '')
         }
       >
         contact

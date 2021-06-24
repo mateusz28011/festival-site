@@ -1,17 +1,20 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import GalleryPreview from './GalleryPreview';
-
-const importImages = (r) => {
-  return r.keys().map(r);
-};
 
 const Gallery = () => {
   const [showGalleryPreview, setShowGalleryPreview] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  const importImages = (r) => {
+    return r.keys().map(r);
+  };
+
   const images = useRef(
     importImages(
       require.context('../../images/gallery', false, /\.(png|jpe?g|svg)$/)
     )
   );
+
   return (
     <>
       {showGalleryPreview !== false ? (

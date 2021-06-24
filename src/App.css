@@ -1,5 +1,4 @@
 body {
-  /* @apply bg-trueGray-100; */
   background-repeat: no-repeat;
   background-attachment: fixed;
   @apply bg-gradient-to-br from-cyan-400 via-violet-400
@@ -7,16 +6,11 @@ body {
 }
 
 .text-glow {
-  transition: text-shadow 250ms ease-in-out;
+  transition: text-shadow 250ms;
 }
 
 .text-glow:hover {
   text-shadow: 0 0 16px #ff66ff;
-}
-
-.container-background {
-  background-image: url('./images/background.png');
-  background-size: contain;
 }
 
 .container-page {

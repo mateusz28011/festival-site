@@ -1,23 +1,17 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.svg';
-import { FaBars } from 'react-icons/fa';
+import { HiMenu, HiX } from 'react-icons/hi';
 import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
 import { isTouchDevice } from './Utils';
 
 const Navbar = () => {
-  const linkStyle = 'text-center text-glow px-1.5 hidden sm:block ';
+  const linkStyle = 'text-center text-glow hidden sm:block ';
   const linkBlockStyle = 'flex-1 justify-around sm:flex';
   const location = useLocation();
-  // const [pathName, setPathName] = useState(location.pathname);
-  // console.log(pathName);
 
   const { isMenuOpen, toggleMenu } = useEventListners();
-
-  // useEffect(() => {
-  //   setPathName(location.pathname);
-  // }, [location]);
 
   const triggerLogoAnimationForTouchScreen = (e) => {
     const logoContainer = document.getElementById('logoContainer');
@@ -43,10 +37,10 @@ const Navbar = () => {
     >
       <div
         className={
-          'absolute w-full h-full rounded-xl shadow-lg -z-10 transition-all duration-700 from-fuchsia-500 opacity-40 ' +
+          'absolute w-full h-full rounded-xl shadow-none -z-10 transition-all duration-1000 from-fuchsia-500 opacity-40 ' +
           (isMenuOpen
             ? 'bg-gradient-to-b to-cyan-500 rounded-b-none'
-            : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 ')
+            : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 shadow-lg')
         }
       ></div>
       <div
@@ -58,7 +52,8 @@ const Navbar = () => {
         <Link
           to='/about'
           className={
-            linkStyle + (location.pathname === '/about' ? 'underline' : '')
+            linkStyle +
+            (location.pathname === '/about' ? 'border-b-2 border-white' : '')
           }
         >
           about
@@ -66,7 +61,8 @@ const Navbar = () => {
         <Link
           to='/program'
           className={
-            linkStyle + (location.pathname === '/program' ? 'underline' : '')
+            linkStyle +
+            (location.pathname === '/program' ? 'border-b-2 border-white' : '')
           }
         >
           program
@@ -74,7 +70,8 @@ const Navbar = () => {
         <Link
           to='/gallery'
           className={
-            linkStyle + (location.pathname === '/gallery' ? 'underline' : '')
+            linkStyle +
+            (location.pathname === '/gallery' ? 'border-b-2 border-white' : '')
           }
         >
           gallery
@@ -103,7 +100,8 @@ const Navbar = () => {
         <Link
           to='/info'
           className={
-            linkStyle + (location.pathname === '/info' ? 'underline' : '')
+            linkStyle +
+            (location.pathname === '/info' ? 'border-b-2 border-white' : '')
           }
         >
           info
@@ -112,7 +110,9 @@ const Navbar = () => {
           to='/partnership'
           className={
             linkStyle +
-            (location.pathname === '/partnership' ? 'underline' : '')
+            (location.pathname === '/partnership'
+              ? 'border-b-2 border-white'
+              : '')
           }
         >
           partnership
@@ -120,18 +120,27 @@ const Navbar = () => {
         <Link
           to='/contact'
           className={
-            linkStyle + (location.pathname === '/contact' ? 'underline' : '')
+            linkStyle +
+            (location.pathname === '/contact' ? 'border-b-2 border-white' : '')
           }
         >
           contact
         </Link>
-        <FaBars
-          className={
-            'ml-auto mr-5 w-7 h-auto sm:hidden cursor-pointer transition-transform duration-1000 transform hover:scale-110 ' +
-            (isMenuOpen ? 'text-secondary-600 animate-hue' : '')
-          }
-          onClick={toggleMenu}
-        />
+        {isMenuOpen ? (
+          <HiX
+            className={
+              'ml-auto mr-5 w-10 h-auto sm:hidden cursor-pointer transition-transform duration-300 transform hover:scale-110 '
+            }
+            onClick={toggleMenu}
+          />
+        ) : (
+          <HiMenu
+            className={
+              'ml-auto mr-5 w-10 h-auto sm:hidden cursor-pointer transition-transform duration-300 transform hover:scale-110 '
+            }
+            onClick={toggleMenu}
+          />
+        )}
       </div>
       <Dropdown location={location} />
     </nav>
