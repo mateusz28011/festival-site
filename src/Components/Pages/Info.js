@@ -15,7 +15,7 @@ const Info = () => {
             laudantium quis?
           </p>
           <div className='block font-medium sm:text-lg bg-white bg-opacity-80 rounded-full shadow-lg w-32 sm:w-36 mx-auto sm:mx-0 ring-0 focus:outline-none hover:bg-opacity-100 text-center py-2 mt-7 cursor-pointer'>
-            Read More
+            Buy Ticket
           </div>
         </div>
         <div className='container-page w-11/12 sm:w-5/12 my-2.5 sm:my-0 sm:ml-auto sm:-mr-4 rg:-mr-7 xl:-mr-10 z-20'>

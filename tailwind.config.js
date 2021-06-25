@@ -39,6 +39,8 @@ module.exports = {
         opacity: 'opacity 300ms ease-out 2 alternate',
         scale: 'scale 300ms ease-out 2 alternate',
         updown: 'updown 7s ease-in-out infinite alternate',
+        updown50: 'updown50 14s ease-in-out infinite alternate',
+        updown75: 'updown75 14s ease-in-out infinite alternate',
         leftright: 'leftright 7s ease-in-out infinite alternate',
       },
       keyframes: {
@@ -72,6 +74,34 @@ module.exports = {
           },
           '100%': {
             transform: 'translate(0, -25px)',
+          },
+        },
+        updown50: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '33%': {
+            transform: 'translate(0, 50%)',
+          },
+          '66%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform: 'translate(0, -50%)',
+          },
+        },
+        updown75: {
+          '0%': {
+            transform: 'translate(0, 0)',
+          },
+          '33%': {
+            transform: 'translate(0, 75%)',
+          },
+          '66%': {
+            transform: 'translate(0, 0)',
+          },
+          '100%': {
+            transform: 'translate(0, -75%)',
           },
         },
         leftright: {

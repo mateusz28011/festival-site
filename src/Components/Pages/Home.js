@@ -30,7 +30,7 @@ const Home = () => {
             window.scrollTo(0, 0);
           }}
           to='/about'
-          className='block font-medium sm:text-lg bg-white bg-opacity-80 py-1.5 sm:py-3 rounded-full shadow-lg w-32 sm:w-36 mx-auto sm:mx-0 my-6 ring-0 focus:outline-none hover:bg-opacity-100 text-center'
+          className='block font-medium text-2xl sm:text-lg bg-white bg-opacity-80 py-3 rounded-full shadow-lg w-44 sm:w-36 mx-auto sm:mx-0 my-6 ring-0 focus:outline-none hover:bg-opacity-100 text-center'
         >
           Read More
         </Link>

@@ -57,15 +57,22 @@ const Program = () => {
           <div></div>
           {images.first.map(({ name, src }) => {
             return (
-              <div
-                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10'
+              <a
+                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500 transform hover:scale-110'
                 key={name}
+                href={`https://www.youtube.com/results?search_query=${name}`}
+                target='_blank'
+                rel='noreferrer'
               >
-                <img className='rounded-full border-4' src={src} alt={name} />
+                <img
+                  className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
+                  src={src}
+                  alt={name}
+                />
                 <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                   {name}
                 </p>
-              </div>
+              </a>
             );
           })}
         </div>
@@ -83,15 +90,22 @@ const Program = () => {
           <div></div>
           {images.second.map(({ name, src }) => {
             return (
-              <div
-                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10'
+              <a
+                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500 transform hover:scale-110'
                 key={name}
+                href={`https://www.youtube.com/results?search_query=${name}`}
+                target='_blank'
+                rel='noreferrer'
               >
-                <img className='rounded-full border-4' src={src} alt={name} />
+                <img
+                  className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
+                  src={src}
+                  alt={name}
+                />
                 <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                   {name}
                 </p>
-              </div>
+              </a>
             );
           })}
         </div>
