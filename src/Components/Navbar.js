@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.svg';
-import { HiMenu, HiX } from 'react-icons/hi';
 import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
 import { isTouchDevice } from './Utils';
+import MenuToggle from './MenuToggle';
+import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const linkStyle = 'text-center text-glow hidden sm:block ';
@@ -30,24 +31,30 @@ const Navbar = () => {
   };
 
   return (
-    <nav
+    <motion.nav
+      layout
       className={
         'sticky top-0 flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center z-30 h-24 sm:h-auto uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
       }
+      // initial={{ y: '-50vh' }}
+      // animate={{
+      //   y: 0,
+      //   transition: { type: 'spring', duration: 1 },
+      // }}
     >
-      <div
+      <motion.div
         className={
           'absolute w-full h-full rounded-xl shadow-none -z-10 transition-all duration-1000 from-fuchsia-500 opacity-40 ' +
           (isMenuOpen
             ? 'bg-gradient-to-b to-cyan-500 rounded-b-none'
             : 'bg-gradient-to-r via-cyan-500 to-lightBlue-500 shadow-lg')
         }
-      ></div>
-      <div
+      ></motion.div>
+      <motion.div
         className={
           'absolute w-full h-full -z-10 backdrop-filter backdrop-blur-md rounded-xl '
         }
-      ></div>
+      ></motion.div>
       <div className={linkBlockStyle}>
         <Link
           to='/about'
@@ -126,24 +133,17 @@ const Navbar = () => {
         >
           contact
         </Link>
-        {isMenuOpen ? (
-          <HiX
-            className={
-              'ml-auto mr-5 w-10 h-auto sm:hidden cursor-pointer transition-transform duration-300 transform hover:scale-110 '
-            }
-            onClick={toggleMenu}
-          />
-        ) : (
-          <HiMenu
-            className={
-              'ml-auto mr-5 w-10 h-auto sm:hidden cursor-pointer transition-transform duration-300 transform hover:scale-110 '
-            }
-            onClick={toggleMenu}
-          />
-        )}
+        <MenuToggle
+          // onClick={toggleMenu}
+          isOpen={isMenuOpen}
+          toggle={toggleMenu}
+        />
       </div>
-      <Dropdown location={location} />
-    </nav>
+      <AnimatePresence>
+        {isMenuOpen ? console.log(1) : console.log(0)}
+        {isMenuOpen ? <Dropdown location={location} /> : null}
+      </AnimatePresence>
+    </motion.nav>
   );
 };
 

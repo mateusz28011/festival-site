@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { motion, useAnimation } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import hand from '../../images/hand.png';
 
@@ -23,9 +24,44 @@ const Contact = () => {
     });
   };
 
+  const controlsHand = useAnimation();
+
+  useEffect(() => {
+    const sequence = async () => {
+      await controlsHand.start({
+        x: ['400%', '0%'],
+        transition: { type: 'spring', duration: 0.75 },
+      });
+      await controlsHand.start({
+        x: ['0%', '30%'],
+        rotate: [0, -10],
+        transition: { type: 'spring', duration: 5 },
+      });
+      return controlsHand.start({
+        x: ['30%', '-30%'],
+        rotate: [-10, 10],
+        transition: {
+          type: 'spring',
+          repeatType: 'reverse',
+          repeat: 'Infinity',
+          duration: 10,
+        },
+      });
+    };
+    sequence();
+  }, [controlsHand]);
+
   return (
     <div className='flex flex-col sm:flex-row'>
-      <div className='container-page mx-auto w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 mt-4 mb-2 sm:-ml-4 lg:-ml-7 xl:-ml-10'>
+      <motion.div
+        className='container-page mx-auto w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 mt-4 mb-2 sm:-ml-4 lg:-ml-7 xl:-ml-10'
+        initial={{ x: '-100vw' }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1 },
+        }}
+        exit={{ x: '-100vw', opacity: 0 }}
+      >
         {isSent ? (
           <div className='text-white font-medium'>
             <h1 className='text-4xl text-center mb-6 mt-32 pt-10'>
@@ -102,11 +138,14 @@ const Contact = () => {
             </button>
           </form>
         )}
-      </div>
-      <img
+      </motion.div>
+      <motion.img
         src={hand}
         alt='hand'
-        className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto animate-leftright z-10'
+        className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
+        initial={{ x: '400%' }}
+        animate={controlsHand}
+        exit={{ x: '100vw', opacity: 0 }}
       />
     </div>
   );

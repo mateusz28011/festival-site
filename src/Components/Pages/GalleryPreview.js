@@ -1,13 +1,20 @@
+import { motion } from 'framer-motion';
 import React, { useState, useEffect } from 'react';
 import { HiX, HiChevronLeft, HiChevronRight } from 'react-icons/hi';
 
 const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
   const [index, setIndex] = useState(imageIndex);
+  const [firstSkip, setFirstSkip] = useState(true);
+  const [isLeftSkip, setIsLeftSkip] = useState(false);
 
   const nextImage = () => {
+    if (firstSkip === true) setFirstSkip(false);
+    setIsLeftSkip(false);
     setIndex((prev) => prev + 1);
   };
   const previousImage = () => {
+    if (firstSkip === true) setFirstSkip(false);
+    setIsLeftSkip(true);
     setIndex((prev) => prev - 1);
   };
 
@@ -29,7 +36,19 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
   });
 
   return (
-    <div className='fixed h-19/20 w-19/20 max-w-screen-2xl inset-0 z-40 m-auto text-white shadow-lg rounded-xl bg-lightBlue-400 border-2 border-violet-400 backdrop-filter backdrop-blur-2xl bg-opacity-50'>
+    <motion.div
+      className='fixed h-19/20 w-19/20 max-w-screen-2xl inset-0 z-40 m-auto text-white shadow-lg rounded-xl bg-lightBlue-400 border-2 border-violet-400 backdrop-filter backdrop-blur-2xl bg-opacity-50'
+      initial={{ x: '-100vw', opacity: 0, transition: { duration: 0.5 } }}
+      animate={{
+        x: 0,
+        opacity: 1,
+        transition: {
+          type: 'spring',
+          duration: 1,
+        },
+      }}
+      exit={{ x: '-100vw', opacity: 0, transition: { duration: 0.5 } }}
+    >
       <HiX
         className='absolute w-10 h-10 sm:w-14 sm:h-14 mr-3 mt-3 top-0 right-0 z-50 cursor-pointer transition-transform transform hover:scale-110'
         onClick={() => setShowGalleryPreview(false)}
@@ -46,15 +65,25 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
           onClick={nextImage}
         />
       ) : null}
-      <img
-        className='relative h-full w-full object-contain max-w-72xl mx-auto top-1/2 transform -translate-y-1/2 z-40 p-8 sm:p-16'
+      <motion.img
+        className='relative h-full w-full object-contain max-w-72xl mx-auto top-1/2s transform -translate-y-1/2s z-40 p-8 sm:p-16'
         src={images.current[index].default}
+        key={index}
         alt=''
+        initial={
+          firstSkip
+            ? false
+            : isLeftSkip
+            ? { x: 300, opacity: 0 }
+            : { x: -300, opacity: 0 }
+        }
+        animate={{ x: 0, opacity: 1 }}
+        // exit={{ x: -300, opacity: 0 }}
       />
       <div className='absolute right-0 bottom-0 mr-4 mb-4 text-xl sm:text-3xl'>{`${
         index + 1
       } of ${images.current.length}`}</div>
-    </div>
+    </motion.div>
   );
 };
 

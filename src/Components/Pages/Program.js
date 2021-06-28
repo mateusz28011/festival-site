@@ -1,6 +1,7 @@
 import React from 'react';
 import mushroom from '../../images/mr2.svg';
 import moon from '../../images/moon2.svg';
+import { motion } from 'framer-motion';
 
 const importRawImages = (r) => {
   return r.keys().map(r);
@@ -39,14 +40,30 @@ const Program = () => {
 
   return (
     <div className='flex flex-col items-center mx-0.5 my-5'>
-      <div className='container-page p-4 pb-0 sm:self-start sm:ml-6 md:ml-10 lg:ml-12 xl:ml-16 -mb-8 z-10 bg-fuchsia-300 bg-opacity-25'>
+      <motion.div
+        className='container-page p-4 pb-0 sm:self-start sm:ml-6 md:ml-10 lg:ml-12 xl:ml-16 -mb-8 z-10 bg-fuchsia-300 bg-opacity-25'
+        initial={{ x: '-100vw' }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1.2 },
+        }}
+        exit={{ x: '-100vw', opacity: 0 }}
+      >
         <h1 className='text-4xl text-white font-medium pb-6 text-center'>
           Lineups
         </h1>
-      </div>
-      <div className='container-page sm:px-8 sm:-ml-20 md:-ml-24 lg:-ml-36 xl:-ml-48 w-11/12'>
+      </motion.div>
+      <motion.div
+        className='container-page sm:px-8 sm:-ml-20 md:-ml-24 lg:-ml-36 xl:-ml-48 w-11/12'
+        initial={{ x: '-100vw' }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1 },
+        }}
+        exit={{ x: '-100vw', opacity: 0 }}
+      >
         <img
-          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -right-14 sm:-right-28 md:-right-32 lg:-right-44 xl:-right-56 animate-updown'
+          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -right-14 sm:-right-28 md:-right-32 lg:-right-44 xl:-right-56 animate-updown filter drop-shadow-lg'
           src={mushroom}
           alt='mushroom'
         />
@@ -76,10 +93,18 @@ const Program = () => {
             );
           })}
         </div>
-      </div>
-      <div className='container-page sm:px-8 w-11/12 mt-14 sm:-mr-20 md:-mr-24 lg:-mr-36 xl:-mr-48'>
+      </motion.div>
+      <motion.div
+        className='container-page sm:px-8 w-11/12 mt-14 sm:-mr-20 md:-mr-24 lg:-mr-36 xl:-mr-48'
+        initial={{ x: '100vw' }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1 },
+        }}
+        exit={{ x: '100vw', opacity: 0 }}
+      >
         <img
-          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -left-14 sm:-left-28 md:-left-32 lg:-left-48 xl:-left-56 animate-updown'
+          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -left-14 sm:-left-28 md:-left-32 lg:-left-48 xl:-left-56 animate-updown filter drop-shadow-lg'
           src={moon}
           alt='moon'
         />
@@ -109,7 +134,7 @@ const Program = () => {
             );
           })}
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 };

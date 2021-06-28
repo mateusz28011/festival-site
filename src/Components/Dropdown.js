@@ -1,18 +1,19 @@
+import { motion } from 'framer-motion';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useEventListners } from './EventListnersContext';
 
 const Dropdown = ({ location }) => {
   const linkStyle = 'pt-3 text-glow ';
-
   const { isMenuOpen } = useEventListners();
-
   return (
     <div
       className={
-        'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-full right-0 scale-0 origin-top top-24 text-white transition duration-300 transform backdrop-filter backdrop-blur-md shadow-lg rounded-b-lg ' +
-        (isMenuOpen ? 'translate-y-0 scale-100 ' : 'opacity-0 ')
+        'absolute -z-10 flex flex-col text-lg items-center uppercase font-aldrich w-full right-0 origin-top top-24 text-white transitionduration-300 transform backdrop-filter backdrop-blur-md shadow-lg rounded-b-lg'
       }
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
     >
       <div
         id='dropDownBackground'

@@ -11,7 +11,7 @@ const EventListnersContextProvider = ({ children }) => {
   // const [isNavbarScrolled, setIsNavbarScrolled] = useState(false);
 
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((prev) => !prev);
   };
 
   // const toggleIsNavbarScrolled = () => {
@@ -34,8 +34,15 @@ const EventListnersContextProvider = ({ children }) => {
     const hideMenu = () => {
       if (window.innerWidth > 640) setIsMenuOpen(false);
     };
+
     const hideMenuClick = (e) => {
-      if (e.target.id !== 'dropDownBackground') setIsMenuOpen(false);
+      if (
+        !['path1', 'path2', 'path3', 'dropDownBackground', 'menuBar'].includes(
+          e.target.id
+        )
+      ) {
+        setIsMenuOpen(false);
+      }
     };
 
     if (isMenuOpen) {

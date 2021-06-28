@@ -1,12 +1,49 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import Timer from '../Timer';
 import mr1 from '../../images/mr12.svg';
+import { motion, useAnimation } from 'framer-motion';
 
 const Home = () => {
+  const controlsMushroom = useAnimation();
+
+  useEffect(() => {
+    const sequence = async () => {
+      await controlsMushroom.start({
+        x: 0,
+        transition: { type: 'spring', duration: 1, delay: 0.25 },
+      });
+      await controlsMushroom.start({
+        y: [0, -40],
+        rotate: [0, -5],
+        transition: { type: 'spring', duration: 2.5 },
+      });
+      return controlsMushroom.start({
+        y: [-40, 40],
+        rotate: [-5, 5],
+        transition: {
+          type: 'spring',
+          ease: 'easeIn',
+          repeatType: 'reverse',
+          repeat: 'Infinity',
+          duration: 5,
+        },
+      });
+    };
+    sequence();
+  }, [controlsMushroom]);
+
   return (
     <div className='flex flex-col sm:flex-row'>
-      <div className='w-11/12 mx-auto my-10 mt-5 container-page sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'>
+      <motion.div
+        className='w-11/12 mx-auto my-10 mt-5 container-page sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'
+        initial={{ x: '-100vw' }}
+        animate={{
+          x: 0,
+          transition: { type: 'spring', duration: 1 },
+        }}
+        exit={{ x: '-100vw', opacity: 0 }}
+      >
         <h1 className='text-4xl text-white font-medium pt-8 pb-6 text-center'>
           Welcome to our festival website!
         </h1>
@@ -23,7 +60,6 @@ const Home = () => {
           aspernatur fuga quos consequatur dolor non numquam adipisci, obcaecati
           nemo.
         </p>
-        {/* <h2 className='text-2xl text-white font-medium p-3'>Lorem, ipsum.</h2> */}
         <p className='px-10 text-left'></p>
         <Link
           onClick={() => {
@@ -41,11 +77,14 @@ const Home = () => {
           <Timer />
           <div className='absolute w-full -z-10 h-full top-0 bg-gradient-to-br from-fuchsia-500 via-lightBlue-300 to-cyan-500 opacity-50 rounded-xl'></div>
         </div>
-      </div>
-      <img
-        className='z-30 left-0 right-0 -mt-6 pb-6 w-52 mx-auto animate-updown filter drop-shadow-lg sm:w-40 md:w-64 lg:w-80 xl:w-96 sm:mt-0 sm:-ml-11 lg:-ml-16 xl:-ml-20 xl:mr-10'
+      </motion.div>
+      <motion.img
+        className='z-30 left-0 right-0 -mt-12 mb-10 sm:my-0 w-52 mx-auto filter drop-shadow-lg sm:w-40 md:w-64 lg:w-80 xl:w-96 sm:mt-0 sm:-ml-11 lg:-ml-16 xl:-ml-20 xl:mr-10'
         src={mr1}
         alt='mushroom'
+        initial={{ x: '100vw' }}
+        animate={controlsMushroom}
+        exit={{ x: '100vw', opacity: 0 }}
       />
     </div>
   );
