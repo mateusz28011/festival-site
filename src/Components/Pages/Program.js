@@ -2,6 +2,7 @@ import React from 'react';
 import mushroom from '../../images/mr2.svg';
 import moon from '../../images/moon2.svg';
 import { motion, useAnimation } from 'framer-motion';
+import { InView } from 'react-intersection-observer';
 
 const importRawImages = (r) => {
   return r.keys().map(r);
@@ -100,25 +101,31 @@ const Program = () => {
           First day
         </h1>
         <div className='flex flex-row flex-wrap items-baseline justify-center'>
-          <div></div>
           {images.first.map(({ name, src }) => {
             return (
-              <a
-                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500 transform hover:scale-110'
-                key={name}
-                href={`https://www.youtube.com/results?search_query=${name}`}
-                target='_blank'
-                rel='noreferrer'
-              >
-                <img
-                  className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
-                  src={src}
-                  alt={name}
-                />
-                <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
-                  {name}
-                </p>
-              </a>
+              <InView key={name} threshold={0.75} triggerOnce>
+                {({ inView, ref }) => (
+                  <motion.a
+                    ref={ref}
+                    className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500'
+                    href={`https://www.youtube.com/results?search_query=${name}`}
+                    target='_blank'
+                    rel='noreferrer'
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={inView ? { x: '0vw', opacity: 1 } : { x: -50 }}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <img
+                      className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
+                      src={src}
+                      alt={name}
+                    />
+                    <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
+                      {name}
+                    </p>
+                  </motion.a>
+                )}
+              </InView>
             );
           })}
         </div>
@@ -146,25 +153,31 @@ const Program = () => {
           Second day
         </h1>
         <div className='flex flex-row flex-wrap items-baseline justify-center'>
-          <div></div>
           {images.second.map(({ name, src }) => {
             return (
-              <a
-                className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500 transform hover:scale-110'
-                key={name}
-                href={`https://www.youtube.com/results?search_query=${name}`}
-                target='_blank'
-                rel='noreferrer'
-              >
-                <img
-                  className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
-                  src={src}
-                  alt={name}
-                />
-                <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
-                  {name}
-                </p>
-              </a>
+              <InView key={name} threshold={0.75} triggerOnce>
+                {({ inView, ref }) => (
+                  <motion.a
+                    ref={ref}
+                    className='w-24 sm:w-44 py-3 mx-4 sm:mx-8 sm:my-2 md:mx-10 transition duration-500 transform'
+                    href={`https://www.youtube.com/results?search_query=${name}`}
+                    target='_blank'
+                    rel='noreferrer'
+                    initial={{ x: -50, opacity: 0 }}
+                    animate={inView ? { x: '0vw', opacity: 1 } : { x: -50 }}
+                    whileHover={{ scale: 1.1 }}
+                  >
+                    <img
+                      className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
+                      src={src}
+                      alt={name}
+                    />
+                    <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
+                      {name}
+                    </p>
+                  </motion.a>
+                )}
+              </InView>
             );
           })}
         </div>

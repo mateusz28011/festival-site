@@ -5,7 +5,7 @@ import { useEventListners } from './EventListnersContext';
 import Dropdown from './Dropdown';
 import { isTouchDevice } from './Utils';
 import MenuToggle from './MenuToggle';
-import { motion, AnimateSharedLayout, AnimatePresence } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const linkStyle = 'text-center text-glow hidden sm:block ';
@@ -34,7 +34,7 @@ const Navbar = () => {
     <motion.nav
       layout
       className={
-        'sticky top-0 flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center z-30 h-24 sm:h-auto uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
+        'relative top-0 flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center z-30 h-24 sm:h-20 lg:h-24 xl:h-28 uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
       }
       // initial={{ y: '-50vh' }}
       // animate={{
@@ -42,6 +42,9 @@ const Navbar = () => {
       //   transition: { type: 'spring', duration: 1 },
       // }}
     >
+      <AnimatePresence>
+        {isMenuOpen ? <Dropdown location={location} /> : null}
+      </AnimatePresence>
       <motion.div
         className={
           'absolute w-full h-full rounded-xl shadow-none -z-10 transition-all duration-1000 from-fuchsia-500 opacity-40 ' +
@@ -52,7 +55,8 @@ const Navbar = () => {
       ></motion.div>
       <motion.div
         className={
-          'absolute w-full h-full -z-10 backdrop-filter backdrop-blur-md rounded-xl '
+          'absolute w-full h-full -z-10 transition-all duration-1000 backdrop-filter backdrop-blur-md rounded-xl ' +
+          (isMenuOpen ? 'rounded-b-none' : '')
         }
       ></motion.div>
       <div className={linkBlockStyle}>
@@ -103,7 +107,7 @@ const Navbar = () => {
           alt='logo'
         />
       </Link>
-      <div className={linkBlockStyle}>
+      <div className={linkBlockStyle + ' relative'}>
         <Link
           to='/info'
           className={
@@ -133,16 +137,8 @@ const Navbar = () => {
         >
           contact
         </Link>
-        <MenuToggle
-          // onClick={toggleMenu}
-          isOpen={isMenuOpen}
-          toggle={toggleMenu}
-        />
+        <MenuToggle isOpen={isMenuOpen} toggle={toggleMenu} />
       </div>
-      <AnimatePresence>
-        {isMenuOpen ? console.log(1) : console.log(0)}
-        {isMenuOpen ? <Dropdown location={location} /> : null}
-      </AnimatePresence>
     </motion.nav>
   );
 };

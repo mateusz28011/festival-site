@@ -1,6 +1,6 @@
 import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
-import bootlemoon from '../../images/bootlemoon.svg';
+// import bootlemoon from '../../images/bootlemoon.svg';
 import planet from '../../images/planet.png';
 
 const About = () => {
