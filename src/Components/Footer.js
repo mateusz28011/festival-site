@@ -9,9 +9,10 @@ function Footer() {
   return (
     <motion.div
       className='flex sm:absolute sm:right-0 sm:top-1/2 sm:bottom-1/2 sm: mx-auto mt-auto -mb-7 p-2 w-1/2 justify-between sm:flex-col sm:w-16 sm:-mr-8 sm:my-auto sm:h-52 sm:items-center z-30'
-      initial={{ x: '100vh' }}
+      initial={{ x: '50%', opacity: 0 }}
       animate={{
         x: 0,
+        opacity: 1,
         transition: { type: 'spring', duration: 1 },
       }}
     >

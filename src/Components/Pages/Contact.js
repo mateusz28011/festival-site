@@ -1,6 +1,7 @@
 import { motion, useAnimation } from 'framer-motion';
 import React, { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
+import InView from 'react-intersection-observer';
 import hand from '../../images/hand.png';
 
 const Contact = () => {
@@ -28,7 +29,8 @@ const Contact = () => {
 
   const sequence = async () => {
     await controlsHand.start({
-      x: ['400%', '0%'],
+      x: '0%',
+      opacity: 1,
       transition: { type: 'spring', duration: 0.75 },
     });
     await controlsHand.start({
@@ -52,12 +54,13 @@ const Contact = () => {
     <div className='flex flex-col sm:flex-row'>
       <motion.div
         className='container-page mx-auto w-11/12 sm:w-8/12 md:w-7/12 lg:w-6/12 mt-4 mb-2 sm:-ml-4 lg:-ml-7 xl:-ml-10'
-        initial={{ x: '-100vw' }}
+        initial={{ x: '-50%', opacity: 0 }}
         animate={{
           x: 0,
+          opacity: 1,
           transition: { type: 'spring', duration: 1 },
         }}
-        exit={{ x: '-100vw', opacity: 0 }}
+        exit={{ x: '-50%', opacity: 0 }}
       >
         {isSent ? (
           <div className='text-white font-medium'>
@@ -136,15 +139,27 @@ const Contact = () => {
           </form>
         )}
       </motion.div>
-      <motion.img
-        src={hand}
-        alt='hand'
-        className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
-        initial={{ x: '400%' }}
-        onLoad={sequence}
-        animate={controlsHand}
-        exit={{ x: '100vw', opacity: 0 }}
-      />
+      <InView
+        threshold={0.2}
+        rootMargin='-50px 0px'
+        triggerOnce
+        onChange={(inView) => {
+          console.log(inView);
+          if (inView) sequence();
+        }}
+      >
+        {({ inView, ref }) => (
+          <motion.img
+            ref={ref}
+            src={hand}
+            alt='hand'
+            className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
+            initial={{ x: '50%', opacity: 0 }}
+            animate={controlsHand}
+            exit={{ x: '50%', opacity: 0 }}
+          />
+        )}
+      </InView>
     </div>
   );
 };

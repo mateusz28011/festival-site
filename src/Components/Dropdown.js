@@ -16,7 +16,6 @@ const Dropdown = ({ location }) => {
         transition: { type: 'spring', bounce: 0.4 },
       }}
       exit={{
-        y: '25%',
         opacity: 0,
       }}
     >

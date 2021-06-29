@@ -1,8 +1,10 @@
 import { motion, useAnimation } from 'framer-motion';
 import React from 'react';
+import InView from 'react-intersection-observer';
 import { Link } from 'react-router-dom';
 import moon from '../../images/moon1.svg';
 import mushroom from '../../images/mr3.svg';
+import { useEventListners } from '../EventListnersContext';
 
 const Partnership = () => {
   const itemStyle =
@@ -10,11 +12,13 @@ const Partnership = () => {
   const itemContainerStyle = 'flex flex-col sm:flex-row';
   const paragraphStyle = 'text-lg text-black mt-1';
 
-  const controlsMushroom = useAnimation();
+  const { isSmallScreen } = useEventListners();
 
+  const controlsMushroom = useAnimation();
   const sequence = async () => {
     await controlsMushroom.start({
-      x: ['100vw', '0vw'],
+      x: '0%',
+      opacity: 1,
       transition: { type: 'spring', duration: 0.5 },
     });
     await controlsMushroom.start({
@@ -33,31 +37,72 @@ const Partnership = () => {
       },
     });
   };
+  // {
+  //               x: 0,
+  //               opacity: 1,
+  //               transition: {
+  //                 type: 'spring',
+  //                 duration: 1,
+  //                 delay: isSmallScreen ? 0 : 0.7,
+  //               },
+  //             }
+
+  const controlsMoon = useAnimation();
+  const sequenceMoon = async () => {
+    await controlsMoon.start({
+      x: '0%',
+      opacity: 1,
+      transition: {
+        type: 'spring',
+        duration: 1,
+        delay: isSmallScreen ? 0 : 0.7,
+      },
+    });
+    // await controlsMoon.start({
+    //   rotate: -5,
+    //   transition: { type: 'spring', duration: 2.5 },
+    // });
+    return controlsMoon.start({
+      rotate: [0, -10, 0, 10],
+      transition: {
+        type: 'spring',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 8,
+      },
+    });
+  };
 
   return (
     <>
       <motion.div
         className='relative container-page bg-teal-300 bg-opacity-20 backdrop-filter-none w-11/12 sm:w-9/12 lg:w-8/12 mx-auto lg:ml-11 mt-4 sm:mt-0'
-        initial={{ x: '-100vw' }}
+        initial={{ x: '-50%', opacity: 0 }}
         animate={{
           x: 0,
+          opacity: 1,
           transition: { type: 'spring', duration: 1 },
         }}
-        exit={{ x: '-100vw', opacity: 0 }}
+        exit={{ x: '-50%', opacity: 0 }}
       >
         <h1 className='text-4xl text-white text-center mb-5 uppercase font-medium'>
           Become part of the story
         </h1>
-        <div className=''>
+        <div>
           <div className={itemContainerStyle}>
             <motion.div
-              className={itemStyle + ' sm:mr-14 sm:-ml-20 md:-ml-24'}
-              initial={{ x: '-100vw' }}
+              className={itemStyle + ' sm:mr-14 sm:-ml-20 md:-ml-24 z-10'}
+              initial={{ x: '-50%', opacity: 0 }}
               animate={{
                 x: 0,
-                transition: { type: 'spring', duration: 1, delay: 0.2 },
+                opacity: 1,
+                transition: {
+                  type: 'spring',
+                  duration: 1,
+                  delay: isSmallScreen ? 0 : 0.2,
+                },
               }}
-              exit={{ x: '-100vw', opacity: 0 }}
+              exit={{ x: '-50%', opacity: 0 }}
             >
               Volunteering
               <p className={paragraphStyle}>
@@ -68,12 +113,17 @@ const Partnership = () => {
             </motion.div>
             <motion.div
               className={itemStyle + ' sm:-mr-16 md:-mr-24'}
-              initial={{ x: '-100vw' }}
+              initial={{ x: '-50%', opacity: 0 }}
               animate={{
                 x: 0,
-                transition: { type: 'spring', duration: 1, delay: 0.4 },
+                opacity: 1,
+                transition: {
+                  type: 'spring',
+                  duration: 1,
+                  delay: isSmallScreen ? 0 : 0.4,
+                },
               }}
-              exit={{ x: '-100vw', opacity: 0 }}
+              exit={{ x: '-50%', opacity: 0 }}
             >
               Workshops
               <p className={paragraphStyle}>
@@ -83,59 +133,92 @@ const Partnership = () => {
             </motion.div>
           </div>
           <motion.img
-            className='sm:absolute w-32 lg:w-36 z-10 inset-0 -top-12 md:-top-14 xl:-top-4 right-24 md:right-32 lg:right-36 xl:right-40 animate-leftright sm:animate-none m-auto filter drop-shadow-lg'
+            className='sm:absolute w-32 lg:w-36 z-20 inset-0 -top-12 md:-top-14 xl:-top-4 right-24 md:right-32 lg:right-36 xl:right-40 animate-leftright sm:animate-none m-auto filter drop-shadow-lg'
             src={moon}
             alt='moon'
-            initial={{ x: '-100vw' }}
-            animate={{
-              x: 0,
-              transition: { type: 'spring', duration: 1, delay: 0.7 },
-            }}
-            exit={{ x: '-100vw', opacity: 0 }}
+            onLoad={sequenceMoon}
+            initial={{ x: '-50%', opacity: 0 }}
+            animate={controlsMoon}
+            exit={{ x: '-50%', opacity: 0 }}
           />
           <div className={itemContainerStyle}>
-            <motion.div
-              className={itemStyle + ' sm:mr-14 sm:-ml-20'}
-              initial={{ x: '-100vw' }}
-              animate={{
-                x: 0,
-                transition: { type: 'spring', duration: 1, delay: 0.6 },
-              }}
-              exit={{ x: '-100vw', opacity: 0 }}
-            >
-              Artists
-              <p className={paragraphStyle}>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illo
-                iure quaerat obcaecati earum eligendi soluta accusantium, neque
-                voluptatem!
-              </p>
-            </motion.div>
-            <motion.div
-              className={itemStyle + ' sm:-mr-20 md:-mr-24 lg:-mr-20 xl:-mr-32'}
-              initial={{ x: '-100vw' }}
-              animate={{
-                x: 0,
-                transition: { type: 'spring', duration: 1, delay: 0.8 },
-              }}
-              exit={{ x: '-100vw', opacity: 0 }}
-            >
-              Gastronomy
-              <p className={paragraphStyle}>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Officiis quae natus alias eaque quod, saepe porro ad sequi, sint
-                illo, numquam consequatur minima neque voluptatum aliquid?
-                Tenetur beatae repellat voluptate.
-              </p>
-            </motion.div>
+            <InView threshold={0.2} triggerOnce>
+              {({ inView, ref }) => (
+                <motion.div
+                  ref={ref}
+                  className={itemStyle + ' sm:mr-14 sm:-ml-20 z-10'}
+                  initial={{ x: '-50%', opacity: 0 }}
+                  animate={
+                    inView
+                      ? {
+                          x: 0,
+                          opacity: 1,
+                          transition: {
+                            type: 'spring',
+                            duration: 1,
+                            delay: isSmallScreen ? 0 : 0.6,
+                          },
+                        }
+                      : ''
+                  }
+                  exit={{ x: '-50%', opacity: 0 }}
+                >
+                  Artists
+                  <p className={paragraphStyle}>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    Illo iure quaerat obcaecati earum eligendi soluta
+                    accusantium, neque voluptatem!
+                  </p>
+                </motion.div>
+              )}
+            </InView>
+            <InView threshold={0.2} triggerOnce>
+              {({ inView, ref }) => (
+                <motion.div
+                  ref={ref}
+                  className={
+                    itemStyle + ' sm:-mr-20 md:-mr-24 lg:-mr-20 xl:-mr-32'
+                  }
+                  initial={{ x: '-50%', opacity: 0 }}
+                  animate={
+                    inView
+                      ? {
+                          x: 0,
+                          opacity: 1,
+                          transition: {
+                            type: 'spring',
+                            duration: 1,
+                            delay: isSmallScreen ? 0 : 0.8,
+                          },
+                        }
+                      : ''
+                  }
+                  exit={{ x: '-50%', opacity: 0 }}
+                >
+                  Gastronomy
+                  <p className={paragraphStyle}>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Officiis quae natus alias eaque quod, saepe porro ad sequi,
+                    sint illo, numquam consequatur minima neque voluptatum
+                    aliquid? Tenetur beatae repellat voluptate.
+                  </p>
+                </motion.div>
+              )}
+            </InView>
           </div>
         </div>
         <motion.div
-          initial={{ x: '-100vw' }}
+          initial={{ x: '-50%', opacity: 0 }}
           animate={{
             x: 0,
-            transition: { type: 'spring', duration: 1, delay: 1 },
+            opacity: 1,
+            transition: {
+              type: 'spring',
+              duration: 1,
+              delay: isSmallScreen ? 0 : 1,
+            },
           }}
-          exit={{ x: '-100vw', opacity: 0 }}
+          exit={{ x: '-50%', opacity: 0 }}
         >
           <Link
             onClick={() => {
@@ -153,9 +236,9 @@ const Partnership = () => {
         src={mushroom}
         alt='mushroom'
         onLoad={sequence}
-        initial={{ x: '100vw' }}
+        initial={{ x: '50%', opacity: 0 }}
         animate={controlsMushroom}
-        exit={{ x: '100vw', opacity: 0 }}
+        exit={{ x: '50%', opacity: 0 }}
       />
     </>
   );

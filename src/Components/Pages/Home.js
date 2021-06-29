@@ -10,6 +10,7 @@ const Home = () => {
   const sequence = async () => {
     await controlsMushroom.start({
       x: 0,
+      opacity: 1,
       transition: { type: 'spring', duration: 1, delay: 0.25 },
     });
     await controlsMushroom.start({
@@ -34,12 +35,13 @@ const Home = () => {
     <div className='flex flex-col sm:flex-row'>
       <motion.div
         className='w-11/12 mx-auto my-10 mt-5 container-page sm:my-auto sm:-ml-4 lg:-ml-7 xl:-ml-10 text-center sm:text-left'
-        initial={{ x: '-100vw' }}
+        initial={{ x: '-50%', opacity: 0 }}
         animate={{
           x: 0,
+          opacity: 1,
           transition: { type: 'spring', duration: 1 },
         }}
-        exit={{ x: '-100vw', opacity: 0 }}
+        exit={{ x: '-50%', opacity: 0 }}
       >
         <h1 className='text-4xl text-white font-medium pt-8 pb-6 text-center'>
           Welcome to our festival website!
@@ -70,19 +72,31 @@ const Home = () => {
         <p className='font-medium text-4xl mt-10 sm:mt-8 mb-2 text-white text-center'>
           TIME TO START:
         </p>
-        <div className='relative w-max mx-auto mb-12 rounded-xl shadow-lg border-2 backdrop-filter backdrop-blur-md'>
+        <motion.div
+          className='relative w-max mx-auto mb-12 rounded-xl shadow-lg border-2 backdrop-filter backdrop-blur-md'
+          whileHover={{
+            scale: [1, 1.05],
+            transition: {
+              type: 'spring',
+              ease: 'easeIn',
+              repeatType: 'reverse',
+              repeat: 'Infinity',
+              duration: 0.5,
+            },
+          }}
+        >
           <Timer />
           <div className='absolute w-full -z-10 h-full top-0 bg-gradient-to-br from-fuchsia-500 via-lightBlue-300 to-cyan-500 opacity-50 rounded-xl'></div>
-        </div>
+        </motion.div>
       </motion.div>
       <motion.img
         className='z-30 left-0 right-0 -mt-12 mb-10 sm:my-0 w-52 mx-auto filter drop-shadow-lg sm:w-40 md:w-64 lg:w-80 xl:w-96 sm:mt-0 sm:-ml-11 lg:-ml-16 xl:-ml-20 xl:mr-10'
         src={mr1}
         alt='mushroom'
         onLoad={sequence}
-        initial={{ x: '100vw' }}
+        initial={{ x: '50%', opacity: 0 }}
         animate={controlsMushroom}
-        exit={{ x: '100vw', opacity: 0 }}
+        exit={{ x: '50%', opacity: 0 }}
       />
     </div>
   );
