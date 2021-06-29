@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Timer from '../Timer';
 import mr1 from '../../images/mr12.svg';
@@ -7,31 +7,28 @@ import { motion, useAnimation } from 'framer-motion';
 const Home = () => {
   const controlsMushroom = useAnimation();
 
-  useEffect(() => {
-    const sequence = async () => {
-      await controlsMushroom.start({
-        x: 0,
-        transition: { type: 'spring', duration: 1, delay: 0.25 },
-      });
-      await controlsMushroom.start({
-        y: [0, -40],
-        rotate: [0, -5],
-        transition: { type: 'spring', duration: 2.5 },
-      });
-      return controlsMushroom.start({
-        y: [-40, 40],
-        rotate: [-5, 5],
-        transition: {
-          type: 'spring',
-          ease: 'easeIn',
-          repeatType: 'reverse',
-          repeat: 'Infinity',
-          duration: 5,
-        },
-      });
-    };
-    sequence();
-  }, [controlsMushroom]);
+  const sequence = async () => {
+    await controlsMushroom.start({
+      x: 0,
+      transition: { type: 'spring', duration: 1, delay: 0.25 },
+    });
+    await controlsMushroom.start({
+      y: [0, -40],
+      rotate: [0, -5],
+      transition: { type: 'spring', duration: 2.5 },
+    });
+    return controlsMushroom.start({
+      y: [-40, 40],
+      rotate: [-5, 5],
+      transition: {
+        type: 'spring',
+        ease: 'easeIn',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 5,
+      },
+    });
+  };
 
   return (
     <div className='flex flex-col sm:flex-row'>
@@ -82,6 +79,7 @@ const Home = () => {
         className='z-30 left-0 right-0 -mt-12 mb-10 sm:my-0 w-52 mx-auto filter drop-shadow-lg sm:w-40 md:w-64 lg:w-80 xl:w-96 sm:mt-0 sm:-ml-11 lg:-ml-16 xl:-ml-20 xl:mr-10'
         src={mr1}
         alt='mushroom'
+        onLoad={sequence}
         initial={{ x: '100vw' }}
         animate={controlsMushroom}
         exit={{ x: '100vw', opacity: 0 }}

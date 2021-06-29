@@ -1,35 +1,32 @@
 import { motion, useAnimation } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React from 'react';
 import mushroom from '../../images/mr7.svg';
 
 const Info = () => {
   const controlsMushroom = useAnimation();
 
-  useEffect(() => {
-    const sequence = async () => {
-      await controlsMushroom.start({
-        x: 0,
-        transition: { type: 'spring', duration: 1, delay: 0.25 },
-      });
-      await controlsMushroom.start({
-        y: [0, -35],
-        rotate: [0, 0],
-        transition: { type: 'spring', duration: 2.5 },
-      });
-      return controlsMushroom.start({
-        y: [-35, 35],
-        rotate: [0, 7],
-        transition: {
-          type: 'spring',
-          ease: 'easeIn',
-          repeatType: 'reverse',
-          repeat: 'Infinity',
-          duration: 5,
-        },
-      });
-    };
-    sequence();
-  }, [controlsMushroom]);
+  const sequence = async () => {
+    await controlsMushroom.start({
+      x: 0,
+      transition: { type: 'spring', duration: 1, delay: 0.25 },
+    });
+    await controlsMushroom.start({
+      y: [0, -30],
+      rotate: [0, 0],
+      transition: { type: 'spring', duration: 2.5 },
+    });
+    return controlsMushroom.start({
+      y: [-30, 35],
+      rotate: [0, 7],
+      transition: {
+        type: 'spring',
+        ease: 'easeIn',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 5,
+      },
+    });
+  };
 
   return (
     <>
@@ -79,9 +76,10 @@ const Info = () => {
           </p>
         </motion.div>
         <motion.img
-          className='sm:absolute w-32 mb-2 sm:mb-0 sm:w-40 md:w-48 lg:w-56 xl:w-60 sm:inset-0 animate-leftrightsm:animate-updown sm:m-auto z-20 filter drop-shadow-lg'
+          className='sm:absolute w-32 mb-2 sm:mb-32 md:mb-16 xl:mb-4 sm:w-40 md:w-48 lg:w-56 xl:w-60 sm:inset-0 animate-leftrightsm:animate-updown sm:m-auto z-20 filter drop-shadow-lg'
           src={mushroom}
           alt='mushroom'
+          onLoad={sequence}
           initial={{ x: '100vw' }}
           animate={controlsMushroom}
           exit={{ x: '100vw', opacity: 0 }}

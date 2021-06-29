@@ -5,20 +5,17 @@ import planet from '../../images/planet.png';
 
 const About = () => {
   const controlsPlanet = useAnimation();
-  controlsPlanet.start(async () => {
-    try {
-      await controlsPlanet.start({
-        y: 0,
-        transition: { type: 'spring', duration: 1 },
-      });
-      await controlsPlanet.start({
-        x: [0, -40],
-        transition: { type: 'spring', duration: 3 },
-      });
-    } catch {
-      return;
-    }
-    controlsPlanet.start({
+
+  const sequence = async () => {
+    await controlsPlanet.start({
+      y: 0,
+      transition: { type: 'spring', duration: 1 },
+    });
+    await controlsPlanet.start({
+      x: [0, -40],
+      transition: { type: 'spring', duration: 3 },
+    });
+    return controlsPlanet.start({
       x: [-40, 40],
       transition: {
         type: 'spring',
@@ -27,7 +24,7 @@ const About = () => {
         duration: 5,
       },
     });
-  });
+  };
 
   return (
     <motion.div className='flex flex-col sm:flex-row items-center mx-0.5 my-5'>
@@ -105,6 +102,7 @@ const About = () => {
         className='w-72 lg:w-80 sm:absolute inset-x-0 mx-auto sm:mr-2 md:mr-8 lg:mr-16 xl:mr-20 bottom-8 md:bottom-10 filter drop-shadow-lg z-20'
         src={planet}
         alt='planet'
+        onLoad={sequence}
         initial={{ y: '100vh' }}
         animate={controlsPlanet}
         exit={{ x: '100vh', opacity: 0 }}

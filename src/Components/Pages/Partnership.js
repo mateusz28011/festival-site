@@ -1,5 +1,5 @@
 import { motion, useAnimation } from 'framer-motion';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import moon from '../../images/moon1.svg';
 import mushroom from '../../images/mr3.svg';
@@ -12,30 +12,27 @@ const Partnership = () => {
 
   const controlsMushroom = useAnimation();
 
-  useEffect(() => {
-    const sequence = async () => {
-      await controlsMushroom.start({
-        x: ['100vw', '0vw'],
-        transition: { type: 'spring', duration: 0.5 },
-      });
-      await controlsMushroom.start({
-        y: ['0%', '50%'],
-        rotate: -5,
-        transition: { type: 'spring', duration: 5 },
-      });
-      return controlsMushroom.start({
-        y: ['50%', '-50%'],
-        rotate: [-5, 8],
-        transition: {
-          type: 'spring',
-          repeatType: 'reverse',
-          repeat: 'Infinity',
-          duration: 10,
-        },
-      });
-    };
-    sequence();
-  }, [controlsMushroom]);
+  const sequence = async () => {
+    await controlsMushroom.start({
+      x: ['100vw', '0vw'],
+      transition: { type: 'spring', duration: 0.5 },
+    });
+    await controlsMushroom.start({
+      y: ['0%', '50%'],
+      rotate: -5,
+      transition: { type: 'spring', duration: 5 },
+    });
+    return controlsMushroom.start({
+      y: ['50%', '-50%'],
+      rotate: [-5, 8],
+      transition: {
+        type: 'spring',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 10,
+      },
+    });
+  };
 
   return (
     <>
@@ -155,6 +152,7 @@ const Partnership = () => {
         className='hidden lg:block absolute w-64 xl:w-72 inset-y-0 right-9 xl:right-11 my-auto filter drop-shadow-lg'
         src={mushroom}
         alt='mushroom'
+        onLoad={sequence}
         initial={{ x: '100vw' }}
         animate={controlsMushroom}
         exit={{ x: '100vw', opacity: 0 }}

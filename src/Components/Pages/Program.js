@@ -1,7 +1,7 @@
 import React from 'react';
 import mushroom from '../../images/mr2.svg';
 import moon from '../../images/moon2.svg';
-import { motion } from 'framer-motion';
+import { motion, useAnimation } from 'framer-motion';
 
 const importRawImages = (r) => {
   return r.keys().map(r);
@@ -38,6 +38,30 @@ const loadImages = () => {
 const Program = () => {
   const images = loadImages();
 
+  const controlsMushroom = useAnimation();
+  const controlsMoon = useAnimation();
+  const sequence = async (controler, initial) => {
+    await controler.start({
+      x: [initial, '0vw'],
+      transition: { type: 'spring', duration: 0.5 },
+    });
+    await controler.start({
+      y: ['0%', '50%'],
+      rotate: -3,
+      transition: { type: 'spring', duration: 5 },
+    });
+    return controler.start({
+      y: ['50%', '-50%'],
+      rotate: [-3, 3],
+      transition: {
+        type: 'spring',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 10,
+      },
+    });
+  };
+
   return (
     <div className='flex flex-col items-center mx-0.5 my-5'>
       <motion.div
@@ -62,10 +86,15 @@ const Program = () => {
         }}
         exit={{ x: '-100vw', opacity: 0 }}
       >
-        <img
-          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -right-14 sm:-right-28 md:-right-32 lg:-right-44 xl:-right-56 animate-updown filter drop-shadow-lg'
+        <motion.img
+          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -right-14 sm:-right-28 md:-right-32 lg:-right-44 xl:-right-56 filter drop-shadow-lg z-30'
           src={mushroom}
           alt='mushroom'
+          onLoad={() => {
+            sequence(controlsMushroom, '-100vw');
+          }}
+          initial={{ x: '-100vw' }}
+          animate={controlsMushroom}
         />
         <h1 className='text-4xl text-white font-medium pb-4 pt-6 sm:py-5 text-center'>
           First day
@@ -103,10 +132,15 @@ const Program = () => {
         }}
         exit={{ x: '100vw', opacity: 0 }}
       >
-        <img
-          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -left-14 sm:-left-28 md:-left-32 lg:-left-48 xl:-left-56 animate-updown filter drop-shadow-lg'
+        <motion.img
+          className='w-28 sm:w-52 md:w-60 lg:w-72 xl:w-80 top-0 bottom-0 my-auto absolute -left-14 sm:-left-28 md:-left-32 lg:-left-48 xl:-left-56 filter drop-shadow-lg z-30'
           src={moon}
           alt='moon'
+          onLoad={() => {
+            sequence(controlsMoon, '100vw');
+          }}
+          initial={{ x: '100vw' }}
+          animate={controlsMoon}
         />
         <h1 className='text-4xl text-white font-medium pb-6 text-center'>
           Second day

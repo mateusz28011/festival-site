@@ -1,5 +1,5 @@
 import { motion, useAnimation } from 'framer-motion';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
 import hand from '../../images/hand.png';
 
@@ -26,30 +26,27 @@ const Contact = () => {
 
   const controlsHand = useAnimation();
 
-  useEffect(() => {
-    const sequence = async () => {
-      await controlsHand.start({
-        x: ['400%', '0%'],
-        transition: { type: 'spring', duration: 0.75 },
-      });
-      await controlsHand.start({
-        x: ['0%', '30%'],
-        rotate: [0, -10],
-        transition: { type: 'spring', duration: 5 },
-      });
-      return controlsHand.start({
-        x: ['30%', '-30%'],
-        rotate: [-10, 10],
-        transition: {
-          type: 'spring',
-          repeatType: 'reverse',
-          repeat: 'Infinity',
-          duration: 10,
-        },
-      });
-    };
-    sequence();
-  }, [controlsHand]);
+  const sequence = async () => {
+    await controlsHand.start({
+      x: ['400%', '0%'],
+      transition: { type: 'spring', duration: 0.75 },
+    });
+    await controlsHand.start({
+      x: ['0%', '30%'],
+      rotate: [0, -10],
+      transition: { type: 'spring', duration: 5 },
+    });
+    return controlsHand.start({
+      x: ['30%', '-30%'],
+      rotate: [-10, 10],
+      transition: {
+        type: 'spring',
+        repeatType: 'reverse',
+        repeat: 'Infinity',
+        duration: 10,
+      },
+    });
+  };
 
   return (
     <div className='flex flex-col sm:flex-row'>
@@ -144,6 +141,7 @@ const Contact = () => {
         alt='hand'
         className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
         initial={{ x: '400%' }}
+        onLoad={sequence}
         animate={controlsHand}
         exit={{ x: '100vw', opacity: 0 }}
       />
