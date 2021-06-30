@@ -37,15 +37,6 @@ const Partnership = () => {
       },
     });
   };
-  // {
-  //               x: 0,
-  //               opacity: 1,
-  //               transition: {
-  //                 type: 'spring',
-  //                 duration: 1,
-  //                 delay: isSmallScreen ? 0 : 0.7,
-  //               },
-  //             }
 
   const controlsMoon = useAnimation();
   const sequenceMoon = async () => {
@@ -58,10 +49,7 @@ const Partnership = () => {
         delay: isSmallScreen ? 0 : 0.7,
       },
     });
-    // await controlsMoon.start({
-    //   rotate: -5,
-    //   transition: { type: 'spring', duration: 2.5 },
-    // });
+
     return controlsMoon.start({
       rotate: [0, -10, 0, 10],
       transition: {

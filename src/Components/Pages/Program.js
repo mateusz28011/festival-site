@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import mushroom from '../../images/mr2.svg';
 import moon from '../../images/moon2.svg';
 import { motion, useAnimation } from 'framer-motion';
@@ -37,7 +37,8 @@ const loadImages = () => {
 };
 
 const Program = () => {
-  const images = loadImages();
+  const [images] = useState(loadImages());
+  const [loadedImages, setLoadedImages] = useState({});
 
   const controlsMushroom = useAnimation();
   const controlsMoon = useAnimation();
@@ -115,13 +116,22 @@ const Program = () => {
                     target='_blank'
                     rel='noreferrer'
                     initial={{ x: -50, opacity: 0 }}
-                    animate={inView ? { x: '0vw', opacity: 1 } : { x: -50 }}
+                    animate={
+                      inView && loadedImages.hasOwnProperty(name)
+                        ? { x: '0vw', opacity: 1 }
+                        : ''
+                    }
                     whileHover={{ scale: 1.1 }}
                   >
                     <img
                       className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
                       src={src}
                       alt={name}
+                      onLoad={() => {
+                        setLoadedImages((prev) => {
+                          return { ...prev, [name]: true };
+                        });
+                      }}
                     />
                     <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                       {name}
@@ -176,13 +186,22 @@ const Program = () => {
                         target='_blank'
                         rel='noreferrer'
                         initial={{ x: -50, opacity: 0 }}
-                        animate={inView ? { x: '0vw', opacity: 1 } : { x: -50 }}
+                        animate={
+                          inView && loadedImages.hasOwnProperty(name)
+                            ? { x: '0vw', opacity: 1 }
+                            : ''
+                        }
                         whileHover={{ scale: 1.1 }}
                       >
                         <img
                           className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
                           src={src}
                           alt={name}
+                          onLoad={() => {
+                            setLoadedImages((prev) => {
+                              return { ...prev, [name]: true };
+                            });
+                          }}
                         />
                         <p className='text-center font-aldrich pt-3 text-base sm:text-2xl'>
                           {name}

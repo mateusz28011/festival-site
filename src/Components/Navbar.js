@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import logo from '../images/logo.svg';
 import { useEventListners } from './EventListnersContext';
@@ -12,6 +12,7 @@ const Navbar = () => {
   const location = useLocation();
 
   const { isMenuOpen, toggleMenu } = useEventListners();
+  const [isNavbarLoaded, setIsNavbarLoaded] = useState(false);
 
   return (
     <motion.nav
@@ -68,11 +69,15 @@ const Navbar = () => {
       </div>
       <motion.div
         initial={{ y: '-100', opacity: 0 }}
-        animate={{
-          y: -8,
-          opacity: 1,
-          transition: { type: 'spring', duration: 1, bounce: 0.5 },
-        }}
+        animate={
+          isNavbarLoaded
+            ? {
+                y: -8,
+                opacity: 1,
+                transition: { type: 'spring', duration: 1, bounce: 0.5 },
+              }
+            : ''
+        }
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 1.1 }}
       >
@@ -81,6 +86,9 @@ const Navbar = () => {
             className={'invisible transition-all w-24 sm:w-20 lg:w-24 xl:w-28'}
             src={logo}
             alt='logo'
+            onLoad={() => {
+              setIsNavbarLoaded(true);
+            }}
           />
           <img
             id='logo'

@@ -21,7 +21,7 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
   const keyPressed = (e) => {
     if (e.keyCode === 37 && index !== 0) {
       previousImage();
-    } else if (e.keyCode === 39 && index !== images.current.length - 1) {
+    } else if (e.keyCode === 39 && index !== images.length - 1) {
       nextImage();
     } else if (e.keyCode === 27) {
       setShowGalleryPreview(false);
@@ -59,7 +59,7 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
           onClick={previousImage}
         />
       ) : null}
-      {index !== images.current.length - 1 ? (
+      {index !== images.length - 1 ? (
         <HiChevronRight
           className='absolute z-50 w-14 h-14 sm:w-20 sm:h-20 my-auto top-0 bottom-0 right-0 -mr-3 sm:-mr-2.5 cursor-pointer transition-transform transform hover:scale-110'
           onClick={nextImage}
@@ -67,7 +67,7 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
       ) : null}
       <motion.img
         className='relative h-full w-full object-contain max-w-72xl mx-auto top-1/2s transform -translate-y-1/2s z-40 p-8 sm:p-16'
-        src={images.current[index].default}
+        src={images[index].default}
         key={index}
         alt=''
         initial={
@@ -82,7 +82,7 @@ const GalleryPreview = ({ images, imageIndex, setShowGalleryPreview }) => {
       />
       <div className='absolute right-0 bottom-0 mr-4 mb-4 text-xl sm:text-3xl'>{`${
         index + 1
-      } of ${images.current.length}`}</div>
+      } of ${images.length}`}</div>
     </motion.div>
   );
 };

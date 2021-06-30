@@ -1,6 +1,6 @@
 import { motion, useAnimation } from 'framer-motion';
-import React from 'react';
-import InView from 'react-intersection-observer';
+import React, { useState, useEffect } from 'react';
+import InView, { useInView } from 'react-intersection-observer';
 // import bootlemoon from '../../images/bootlemoon.svg';
 import planet from '../../images/planet.png';
 import { useEventListners } from '../EventListnersContext';
@@ -8,27 +8,38 @@ import { useEventListners } from '../EventListnersContext';
 const About = () => {
   const { isSmallScreen } = useEventListners();
 
+  const { inView, ref } = useInView({
+    threshold: 0.2,
+    triggerOnce: true,
+  });
+  const [isLoaded, setIsLoaded] = useState(false);
+
   const controlsPlanet = useAnimation();
-  const sequence = async () => {
-    await controlsPlanet.start({
-      x: '0%',
-      opacity: 1,
-      transition: { type: 'spring', duration: 1 },
-    });
-    await controlsPlanet.start({
-      x: ['0%', '-10%'],
-      transition: { type: 'spring', duration: 3 },
-    });
-    return controlsPlanet.start({
-      x: ['-10%', '10%'],
-      transition: {
-        type: 'spring',
-        repeatType: 'reverse',
-        repeat: 'Infinity',
-        duration: 5,
-      },
-    });
-  };
+
+  useEffect(() => {
+    const sequence = async () => {
+      await controlsPlanet.start({
+        x: '0%',
+        opacity: 1,
+        transition: { type: 'spring', duration: 1 },
+      });
+      await controlsPlanet.start({
+        x: ['0%', '-10%'],
+        transition: { type: 'spring', duration: 3 },
+      });
+      return controlsPlanet.start({
+        x: ['-10%', '10%'],
+        transition: {
+          type: 'spring',
+          repeatType: 'reverse',
+          repeat: 'Infinity',
+          duration: 5,
+        },
+      });
+    };
+
+    if (isLoaded && inView) sequence();
+  }, [inView, isLoaded, controlsPlanet]);
 
   return (
     <motion.div className='flex flex-col sm:flex-row items-center mx-0.5 my-5'>
@@ -122,25 +133,19 @@ const About = () => {
           },
         }}
       /> */}
-      <InView
-        threshold={0.2}
-        triggerOnce
-        onChange={(inView) => {
-          if (inView) sequence();
+
+      <motion.img
+        ref={ref}
+        className='w-72 lg:w-80 sm:absolute inset-x-0 mx-auto sm:mr-2 md:mr-8 lg:mr-16 xl:mr-20 bottom-8 md:bottom-10 filter drop-shadow-lg z-20'
+        src={planet}
+        alt='planet'
+        onLoad={() => {
+          setIsLoaded(true);
         }}
-      >
-        {({ inView, ref }) => (
-          <motion.img
-            ref={ref}
-            className='w-72 lg:w-80 sm:absolute inset-x-0 mx-auto sm:mr-2 md:mr-8 lg:mr-16 xl:mr-20 bottom-8 md:bottom-10 filter drop-shadow-lg z-20'
-            src={planet}
-            alt='planet'
-            initial={{ x: '50%', opacity: 0 }}
-            animate={controlsPlanet}
-            exit={{ x: '100%', opacity: 0 }}
-          />
-        )}
-      </InView>
+        initial={{ x: '50%', opacity: 0 }}
+        animate={controlsPlanet}
+        exit={{ x: '100%', opacity: 0 }}
+      />
     </motion.div>
   );
 };

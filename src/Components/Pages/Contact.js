@@ -1,7 +1,7 @@
 import { motion, useAnimation } from 'framer-motion';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FaRegCheckCircle } from 'react-icons/fa';
-import InView from 'react-intersection-observer';
+import { useInView } from 'react-intersection-observer';
 import hand from '../../images/hand.png';
 
 const Contact = () => {
@@ -12,6 +12,13 @@ const Contact = () => {
     message: '',
   });
   const [isSent, setIsSent] = useState(false);
+
+  const { inView, ref } = useInView({
+    threshold: 0.2,
+    rootMargin: '-50px 0px',
+    triggerOnce: true,
+  });
+  const [isLoaded, setIsLoaded] = useState(false);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,28 +34,32 @@ const Contact = () => {
 
   const controlsHand = useAnimation();
 
-  const sequence = async () => {
-    await controlsHand.start({
-      x: '0%',
-      opacity: 1,
-      transition: { type: 'spring', duration: 0.75 },
-    });
-    await controlsHand.start({
-      x: ['0%', '30%'],
-      rotate: [0, -10],
-      transition: { type: 'spring', duration: 5 },
-    });
-    return controlsHand.start({
-      x: ['30%', '-30%'],
-      rotate: [-10, 10],
-      transition: {
-        type: 'spring',
-        repeatType: 'reverse',
-        repeat: 'Infinity',
-        duration: 10,
-      },
-    });
-  };
+  useEffect(() => {
+    const sequence = async () => {
+      await controlsHand.start({
+        x: 0,
+        opacity: 1,
+        transition: { type: 'spring', duration: 0.75 },
+      });
+      await controlsHand.start({
+        x: [0, 40],
+        rotate: [0, -6],
+        transition: { type: 'spring', duration: 4 },
+      });
+      return controlsHand.start({
+        x: [40, -40],
+        rotate: [-6, 6],
+        transition: {
+          type: 'spring',
+          repeatType: 'reverse',
+          repeat: 'Infinity',
+          duration: 8,
+        },
+      });
+    };
+
+    if (isLoaded && inView) sequence();
+  }, [inView, isLoaded, controlsHand]);
 
   return (
     <div className='flex flex-col sm:flex-row'>
@@ -139,27 +150,18 @@ const Contact = () => {
           </form>
         )}
       </motion.div>
-      <InView
-        threshold={0.2}
-        rootMargin='-50px 0px'
-        triggerOnce
-        onChange={(inView) => {
-          console.log(inView);
-          if (inView) sequence();
+      <motion.img
+        ref={ref}
+        src={hand}
+        alt='hand'
+        onLoad={() => {
+          setIsLoaded(true);
         }}
-      >
-        {({ inView, ref }) => (
-          <motion.img
-            ref={ref}
-            src={hand}
-            alt='hand'
-            className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
-            initial={{ x: '50%', opacity: 0 }}
-            animate={controlsHand}
-            exit={{ x: '50%', opacity: 0 }}
-          />
-        )}
-      </InView>
+        className='h-80 sm:h-full my-4 sm:-ml-4 mx-auto sm:my-auto z-10 filter drop-shadow-lg'
+        initial={{ x: 150, opacity: 0 }}
+        animate={controlsHand}
+        exit={{ x: '50%', opacity: 0 }}
+      />
     </div>
   );
 };
