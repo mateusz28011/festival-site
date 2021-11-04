@@ -17,6 +17,7 @@ const Dropdown = ({ location }) => {
       }}
       exit={{
         opacity: 0,
+        transition: { duration: 0.2 },
       }}
     >
       <div

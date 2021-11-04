@@ -16,7 +16,6 @@ const Navbar = () => {
 
   return (
     <motion.nav
-      layout
       className={
         'relative top-0 flex w-10/12 xl:w-11/12 max-w-6xl mx-auto justify-center items-center z-30 h-24 sm:h-20 lg:h-24 xl:h-28 uppercase text-white font-aldrich sm:text-sm md:text-base lg:text-xl xl:text-2xl '
       }

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion';
 import React from 'react';
 import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa';
 
@@ -7,13 +6,13 @@ function Footer() {
   const iconContainerStyle =
     'rounded-full p-2.5 bg-white bg-opacity-80 shadow-xl backdrop-filter backdrop-blur-sm hover:bg-opacity-100';
   return (
-    <motion.div
+    <div
       className='flex sm:absolute sm:right-0 sm:top-1/2 sm:bottom-1/2 sm: mx-auto mt-auto -mb-7 p-2 w-1/2 justify-between sm:flex-col sm:w-16 sm:-mr-8 sm:my-auto sm:h-52 sm:items-center z-30'
       initial={{ x: '50%', opacity: 0 }}
       animate={{
         x: 0,
         opacity: 1,
-        transition: { type: 'spring', duration: 1 },
+        transition: { duration: 1 },
       }}
     >
       <a className={iconContainerStyle} href='/'>
@@ -25,7 +24,7 @@ function Footer() {
       <a className={iconContainerStyle} href='/'>
         <FaInstagram className={iconStyle} />
       </a>
-    </motion.div>
+    </div>
   );
 }
 

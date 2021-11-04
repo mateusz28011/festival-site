@@ -42,7 +42,7 @@ const About = () => {
   }, [inView, isLoaded, controlsPlanet]);
 
   return (
-    <motion.div className='flex flex-col sm:flex-row items-center mx-0.5 my-5'>
+    <div className='flex flex-col sm:flex-row items-center mx-0.5 my-5'>
       <motion.div
         className='w-11/12 sm:w-1/2 h-5/6 container-page sm:-ml-4 lg:-ml-7 xl:-ml-10 z-10'
         initial={{ x: '-50%', opacity: 0 }}
@@ -146,7 +146,7 @@ const About = () => {
         animate={controlsPlanet}
         exit={{ x: '100%', opacity: 0 }}
       />
-    </motion.div>
+    </div>
   );
 };
 

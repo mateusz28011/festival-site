@@ -27,7 +27,10 @@ const Gallery = () => {
           />
         ) : null}
       </AnimatePresence>
-      <div className='col-count-1 sm:col-count-2 lg:col-count-3 col-gap-0 px-7 mt-5 sm:mt-0 '>
+      <div
+        className='col-count-1 sm:col-count-2 lg:col-count-3 col-gap-0 px-7 mt-5 sm:mt-0 '
+        style={{ minHeight: '32rem' }}
+      >
         {images.map((image, index) => (
           <motion.div
             key={index}

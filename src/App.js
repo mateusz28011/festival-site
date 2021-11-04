@@ -1,4 +1,3 @@
-import React from 'react';
 import './App.css';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import Navbar from './Components/Navbar';
@@ -15,7 +14,7 @@ import Gallery from './Components/Pages/Gallery';
 import Info from './Components/Pages/Info';
 import Partnership from './Components/Pages/Partnership';
 import Contact from './Components/Pages/Contact';
-import { AnimatePresence, AnimateSharedLayout } from 'framer-motion';
+import { AnimatePresence } from 'framer-motion';
 
 const App = () => {
   const location = useLocation();
@@ -25,42 +24,42 @@ const App = () => {
       {/* <AudioVisualizerProvider>
         <AudioPlayer />
       </AudioVisualizerProvider> */}
+      {/* <AnimateSharedLayout> */}
       <Container>
-        <AnimateSharedLayout>
-          <Navbar />
-          <Section>
-            <AnimatePresence exitBeforeEnter>
-              <Switch location={location} key={location.pathname}>
-                <Route exact path='/'>
-                  <Home />
-                </Route>
-                <Route exact path='/about'>
-                  <About />
-                </Route>
-                <Route exact path='/program'>
-                  <Program />
-                </Route>
-                <Route exact path='/gallery'>
-                  <Gallery />
-                </Route>
-                <Route exact path='/info'>
-                  <Info />
-                </Route>
-                <Route exact path='/partnership'>
-                  <Partnership />
-                </Route>
-                <Route exact path='/contact'>
-                  <Contact />
-                </Route>
-                <Route>
-                  <Home />
-                </Route>
-              </Switch>
-            </AnimatePresence>
-            <Footer />
-          </Section>
-        </AnimateSharedLayout>
+        <Navbar />
+        <Section>
+          <AnimatePresence exitBeforeEnter>
+            <Switch location={location} key={location.pathname}>
+              <Route exact path='/'>
+                <Home />
+              </Route>
+              <Route exact path='/about'>
+                <About />
+              </Route>
+              <Route exact path='/program'>
+                <Program />
+              </Route>
+              <Route exact path='/gallery'>
+                <Gallery />
+              </Route>
+              <Route exact path='/info'>
+                <Info />
+              </Route>
+              <Route exact path='/partnership'>
+                <Partnership />
+              </Route>
+              <Route exact path='/contact'>
+                <Contact />
+              </Route>
+              <Route>
+                <Home />
+              </Route>
+            </Switch>
+          </AnimatePresence>
+          <Footer />
+        </Section>
       </Container>
+      {/* </AnimateSharedLayout> */}
     </EventListnersContextProvider>
   );
 };

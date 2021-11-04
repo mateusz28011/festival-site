@@ -46,7 +46,7 @@ const Partnership = () => {
       transition: {
         type: 'spring',
         duration: 1,
-        delay: isSmallScreen ? 0 : 0.7,
+        delay: isSmallScreen ? 0 : 0.4,
       },
     });
 
@@ -144,7 +144,7 @@ const Partnership = () => {
                           transition: {
                             type: 'spring',
                             duration: 1,
-                            delay: isSmallScreen ? 0 : 0.6,
+                            delay: isSmallScreen ? 0 : 0.2,
                           },
                         }
                       : ''
@@ -176,7 +176,7 @@ const Partnership = () => {
                           transition: {
                             type: 'spring',
                             duration: 1,
-                            delay: isSmallScreen ? 0 : 0.8,
+                            delay: isSmallScreen ? 0 : 0.4,
                           },
                         }
                       : ''
@@ -203,7 +203,7 @@ const Partnership = () => {
             transition: {
               type: 'spring',
               duration: 1,
-              delay: isSmallScreen ? 0 : 1,
+              delay: isSmallScreen ? 0 : 0.4,
             },
           }}
           exit={{ x: '-50%', opacity: 0 }}

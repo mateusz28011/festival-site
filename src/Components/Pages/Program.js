@@ -46,18 +46,20 @@ const Program = () => {
     await controler.start({
       x: [initial, '0%'],
       opacity: 1,
-      transition: { type: 'spring', duration: 0.5 },
+      // transition: { type: 'spring', duration: 0.5 },
+      transition: { duration: 0.5 },
     });
     await controler.start({
       y: ['0%', '50%'],
       rotate: -3,
-      transition: { type: 'spring', duration: 5 },
+      // transition: { type: 'spring', duration: 5 },
+      transition: { duration: 5 },
     });
     return controler.start({
       y: ['50%', '-50%'],
       rotate: [-3, 3],
       transition: {
-        type: 'spring',
+        // type: 'spring',
         repeatType: 'reverse',
         repeat: 'Infinity',
         duration: 10,
@@ -66,7 +68,10 @@ const Program = () => {
   };
 
   return (
-    <div className='flex flex-col items-center mx-0.5 my-5'>
+    <div
+      style={{ minHeight: '32rem' }}
+      className='flex flex-col items-center mx-0.5 my-5'
+    >
       <motion.div
         className='container-page p-4 pb-0 sm:self-start sm:ml-6 md:ml-10 lg:ml-12 xl:ml-16 -mb-8 z-10 bg-fuchsia-300 bg-opacity-25'
         initial={{ x: '-300%', opacity: 0 }}
@@ -107,7 +112,7 @@ const Program = () => {
         <div className='flex flex-row flex-wrap items-baseline justify-center'>
           {images.first.map(({ name, src }) => {
             return (
-              <InView key={name} threshold={0.2} triggerOnce>
+              <InView key={name} threshold={0.1} triggerOnce>
                 {({ inView, ref }) => (
                   <motion.a
                     ref={ref}
@@ -177,7 +182,7 @@ const Program = () => {
             <div className='flex flex-row flex-wrap items-baseline justify-center'>
               {images.second.map(({ name, src }) => {
                 return (
-                  <InView key={name} threshold={0.2} triggerOnce>
+                  <InView key={name} threshold={0.1} triggerOnce>
                     {({ inView, ref }) => (
                       <motion.a
                         ref={ref}
@@ -191,7 +196,9 @@ const Program = () => {
                             ? { x: '0vw', opacity: 1 }
                             : ''
                         }
-                        whileHover={{ scale: 1.1 }}
+                        whileHover={{
+                          scale: 1.1,
+                        }}
                       >
                         <img
                           className='rounded-full border-4 cursor-pointer transition duration-500 filter hover:hue-rotate-180'
