@@ -29,7 +29,15 @@ Project is created with:
 
 ## Setup
 
-TODO
+### Clone repository
+    git clone https://github.com/mateusz28011/festival-site.git
+### Install dependecies
+    npm install
+### Run local server
+    npm start
+### Open your browser and enter
+    http://localhost:3000
+
 
 ## Sources
 
