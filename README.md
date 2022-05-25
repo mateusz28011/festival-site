@@ -13,7 +13,7 @@
 
 ## Live demo
 
-[Demo link](https://festival-site.mateuszsiwinski.com/)
+[Demo link](https://festival-site.mateuszsiwinski.com/) (Loading may take a while)
 
 ## General Info
 
